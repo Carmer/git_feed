@@ -11,14 +11,22 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
-
+gem 'omniauth-github'
+gem 'figaro'
+gem 'materialize-sass'
+gem 'responders'
+gem 'rails_12factor', group: :production
+gem 'skylight'
 
 
 group :development, :test do
   gem 'byebug'
-
   gem 'web-console', '~> 2.0'
-  gem 'rspec-rails'
   gem 'spring'
+  gem 'pry'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'simplecov'
 end
