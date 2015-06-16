@@ -35,24 +35,21 @@ var collectEvents = function(eventsInfo) {
 
 var printEvents = function(events) {
   for (i = 0; i < events.length; i ++ ){
+
+    if ( events[i].type === "CreateEvent") {
+      printCreateEvent(events[i])
+    }
+
+    else if (events[i].type === "DeleteEvent") {
+      printDeleteEvent(events[i])
+    }
+
+    else {
     $("<li>"
     + "<div class='card'>"
     + "<div class='card-content'>"
     + "<span class='card-title activator grey-text text-darken-4 event-title'>"
     + "<i class='mdi-navigation-more-vert right'></i></span>"
-    + "<h5>"
-    + events[i].actor.login
-    + " - "
-    + events[i].type
-    + " - "
-    + events[i].repo.name.split("/")[1]
-    + "</h5>"
-    + "<a href='"
-    + events[i].repo.url
-    + "'> Repository: "
-    + events[i].repo.name
-    + "</a>"
-    + "</div>"
     + "<div class='waves-effect waves-block waves-light col s3'>"
     + "<p>"
     + "<a href='"
@@ -62,12 +59,26 @@ var printEvents = function(events) {
     + events[i].actor.avatar_url
     + ">"
     + "</a>"
-    + "</p>"
     + "</div>"
+    + "</p>"
     + "<div class='col s8 offest-s3'>"
+    + "<h5>"
+    + events[i].actor.login
+    + " - "
+    + events[i].type
+    + " - "
+    + events[i].repo.name.split("/")[1]
+    + "</h5>"
     + "<p>"
+    + "<a href='"
+    + events[i].repo.url
+    + "'> Repository: "
+    + events[i].repo.name
+    + "</a>"
+    + "<br>"
     + "This is where event data from event types will go" //fix this
     + "</p>"
+    + "</div>"
     + "</div>"
     + "<div class='card-reveal'>"
     + "<span class='card-title grey-text text-darken-4'>"
@@ -79,5 +90,6 @@ var printEvents = function(events) {
     + "</p>"
     + "</div>"
     + "</li>").appendTo(".event-feed-list");
+  };
   };
 }
