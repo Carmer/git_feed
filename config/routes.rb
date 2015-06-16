@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   get "/auth/github/callback", to: "sessions#create"
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get "/events", to: 'users#events', as: :events
+      get "/received_events", to: 'users#events', as: :received_events
+    end
+  end
 
   require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
