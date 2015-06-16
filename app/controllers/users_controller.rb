@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by!(id: params[:id])
-    GithubQuery.perform_async(@user.login)
+    GithubQuery.perform_async(@user.login, current_user.token)
   end
 
   def received_events
