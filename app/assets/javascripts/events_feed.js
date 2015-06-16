@@ -44,6 +44,10 @@ var printEvents = function(events) {
       printDeleteEvent(events[i])
     }
 
+    else if (events[i].type === "PushEvent") {
+      printPushEvent(events[i])
+    }
+
     else {
     $("<li>"
     + "<div class='card'>"
