@@ -59,7 +59,11 @@ var printEvents = function(events) {
     else if (events[i].type === "IssueCommentEvent") {
       printIssueCommentEvent(events[i])
     }
-    
+
+    else if (events[i].type === "ForkEvent") {
+      printForkEvent(events[i])
+    }
+
     else {
     $("<li>"
     + "<div class='card'>"
