@@ -13,7 +13,7 @@ var printDeleteEvent = function(deleteEvent) {
   + deleteEvent.actor.avatar_url
   + ">"
   + "</a>"
-  + "<div class='col s6 offset-s1'>"
+  + "<div class='col s6'>"
   + new Date(Date.parse(deleteEvent.created_at)).getMonth()
   + "/"
   + new Date(Date.parse(deleteEvent.created_at)).getDate()

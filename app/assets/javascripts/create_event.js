@@ -13,7 +13,7 @@ $("<li>"
 + createEvent.actor.avatar_url
 + ">"
 + "</a>"
-+ "<div class='col s6 offset-s1'>"
++ "<div class='col s6'>"
 + new Date(Date.parse(createEvent.created_at)).getMonth()
 + "/"
 + new Date(Date.parse(createEvent.created_at)).getDate()

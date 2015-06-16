@@ -56,6 +56,10 @@ var printEvents = function(events) {
       printIssuesEvent(events[i])
     }
 
+    else if (events[i].type === "IssueCommentEvent") {
+      printIssueCommentEvent(events[i])
+    }
+    
     else {
     $("<li>"
     + "<div class='card'>"
