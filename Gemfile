@@ -16,6 +16,10 @@ gem 'figaro'
 gem 'materialize-sass'
 gem 'responders'
 gem 'rails_12factor', group: :production
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'httparty'
+gem 'foreman'
 gem 'skylight'
 
 
