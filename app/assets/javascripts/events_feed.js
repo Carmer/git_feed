@@ -48,6 +48,14 @@ var printEvents = function(events) {
       printPushEvent(events[i])
     }
 
+    else if (events[i].type === "PullRequestEvent") {
+      printPullRequestEvent(events[i])
+    }
+
+    else if (events[i].type === "IssuesEvent") {
+      printIssuesEvent(events[i])
+    }
+
     else {
     $("<li>"
     + "<div class='card'>"
@@ -79,8 +87,6 @@ var printEvents = function(events) {
     + "'> Repository: "
     + events[i].repo.name
     + "</a>"
-    + "<br>"
-    + "This is where event data from event types will go" //fix this
     + "</p>"
     + "</div>"
     + "</div>"

@@ -25,7 +25,7 @@ $("<li>"
 + "<h5>"
 + pushEvent.actor.login
 + " - "
-+ "Pushed "
++ "pushed "
 + pushEvent.payload.size
 + " commits to the "
 + pushEvent.payload.ref.split("/")[2]
@@ -39,8 +39,6 @@ $("<li>"
 + "'>"
 + pushEvent.repo.name
 + "</a>"
-+ "<br>"
-+ "This is where event data from event types will go" //fix this
 + "</p>"
 + "</div>"
 + "</div>"

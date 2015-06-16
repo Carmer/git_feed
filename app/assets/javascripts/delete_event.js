@@ -25,7 +25,7 @@ var printDeleteEvent = function(deleteEvent) {
   + "<h5>"
   + deleteEvent.actor.login
   + " - "
-  + "Created a "
+  + "deleted a "
   + deleteEvent.payload.ref_type
   + "</h5>"
   + "<div class='col s9 offest-s3 v-align'>"
@@ -36,8 +36,6 @@ var printDeleteEvent = function(deleteEvent) {
   + "'>"
   + deleteEvent.repo.name
   + "</a>"
-  + "<br>"
-  + "This is where event data from event types will go" //fix this
   + "</p>"
   + "</div>"
   + "</div>"

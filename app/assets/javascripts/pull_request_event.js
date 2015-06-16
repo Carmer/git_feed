@@ -1,4 +1,4 @@
-var printCreateEvent = function(createEvent) {
+var printPullRequestEvent = function(pullRequestEvent) {
 $("<li>"
 + "<div class='card'>"
 + "<div class='card-content'>"
@@ -7,34 +7,36 @@ $("<li>"
 + "<div class='waves-effect waves-block waves-light col s3'>"
 + "<p>"
 + "<a href='http://github.com/"
-+ createEvent.actor.login
++ pullRequestEvent.actor.login
 + "'>"
 + "<img class='circle img-avatar' src="
-+ createEvent.actor.avatar_url
++ pullRequestEvent.actor.avatar_url
 + ">"
 + "</a>"
 + "<div class='col s6 offset-s1'>"
-+ new Date(Date.parse(createEvent.created_at)).getMonth()
++ new Date(Date.parse(pullRequestEvent.created_at)).getMonth()
 + "/"
-+ new Date(Date.parse(createEvent.created_at)).getDate()
++ new Date(Date.parse(pullRequestEvent.created_at)).getDate()
 + "/"
-+ new Date(Date.parse(createEvent.created_at)).getFullYear()
++ new Date(Date.parse(pullRequestEvent.created_at)).getFullYear()
 + "</div>"
 + "</div>"
 + "</p>"
 + "<h5>"
-+ createEvent.actor.login
++ pullRequestEvent.actor.login
 + " - "
-+ "created a "
-+ createEvent.payload.ref_type
++ "submited a pull request for: "
++ pullRequestEvent.payload.pull_request.title
++ " to the repository "
++ pullRequestEvent.repo.full_name
 + "</h5>"
 + "<div class='col s9 offest-s3 v-align'>"
 + "<p>"
 +  "Repository: "
 + "<a href='http://github.com/"
-+ createEvent.repo.name
++ pullRequestEvent.repo.name
 + "'>"
-+ createEvent.repo.name
++ pullRequestEvent.repo.name
 + "</a>"
 + "</p>"
 + "</div>"

@@ -29,8 +29,6 @@ $("<li>"
 + "'> Repository: "
 + commitCommentEvent.repo.name
 + "</a>"
-+ "<br>"
-+ "This is where event data from event types will go" //fix this
 + "</p>"
 + "</div>"
 + "</div>"

@@ -1,4 +1,4 @@
-var printCreateEvent = function(createEvent) {
+var printIssuesEvent = function(issuesEvent) {
 $("<li>"
 + "<div class='card'>"
 + "<div class='card-content'>"
@@ -7,34 +7,35 @@ $("<li>"
 + "<div class='waves-effect waves-block waves-light col s3'>"
 + "<p>"
 + "<a href='http://github.com/"
-+ createEvent.actor.login
++ issuesEvent.actor.login
 + "'>"
 + "<img class='circle img-avatar' src="
-+ createEvent.actor.avatar_url
++ issuesEvent.actor.avatar_url
 + ">"
 + "</a>"
 + "<div class='col s6 offset-s1'>"
-+ new Date(Date.parse(createEvent.created_at)).getMonth()
++ new Date(Date.parse(issuesEvent.created_at)).getMonth()
 + "/"
-+ new Date(Date.parse(createEvent.created_at)).getDate()
++ new Date(Date.parse(issuesEvent.created_at)).getDate()
 + "/"
-+ new Date(Date.parse(createEvent.created_at)).getFullYear()
++ new Date(Date.parse(issuesEvent.created_at)).getFullYear()
 + "</div>"
 + "</div>"
 + "</p>"
 + "<h5>"
-+ createEvent.actor.login
++ issuesEvent.actor.login
 + " - "
-+ "created a "
-+ createEvent.payload.ref_type
++ issuesEvent.payload.action
++ " an issue for the repository "
++ issuesEvent.repo.name
 + "</h5>"
 + "<div class='col s9 offest-s3 v-align'>"
 + "<p>"
 +  "Repository: "
 + "<a href='http://github.com/"
-+ createEvent.repo.name
++ issuesEvent.repo.name
 + "'>"
-+ createEvent.repo.name
++ issuesEvent.repo.name
 + "</a>"
 + "</p>"
 + "</div>"
