@@ -16,7 +16,9 @@ gem 'figaro'
 gem 'materialize-sass'
 gem 'responders'
 gem 'rails_12factor', group: :production
-gem 'skylight'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'httparty'
 
 
 group :development, :test do
