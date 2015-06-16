@@ -42,6 +42,10 @@ var printEvents = function(events) {
     + "<i class='mdi-navigation-more-vert right'></i></span>"
     + "<h5>"
     + events[i].actor.login
+    + " - "
+    + events[i].type
+    + " - "
+    + events[i].repo.name.split("/")[1]
     + "</h5>"
     + "<a href="
     + events[i].repo.url

@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user.save
       flash[:success] = "Log In Successful"
       session[:user_id] = user.id
-      redirect_to user_path(id: current_user.id)
+      redirect_to user
     else
       flash.now[:success] = "Log In Unsuccessful. Please Try Again"
       render :new
