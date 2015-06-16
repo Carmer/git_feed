@@ -47,23 +47,24 @@ var printEvents = function(events) {
     + " - "
     + events[i].repo.name.split("/")[1]
     + "</h5>"
-    + "<a href="
+    + "<a href='"
     + events[i].repo.url
-    + "> Repository: "
+    + "'> Repository: "
     + events[i].repo.name
     + "</a>"
     + "</div>"
     + "<div class='waves-effect waves-block waves-light col s3'>"
     + "<p>"
-    + "<a href="
+    + "<a href='"
     + events[i].actor.url
-    + ">"
+    + "'>"
     + "<img class='circle img-avatar' src="
     + events[i].actor.avatar_url
+    + ">"
     + "</a>"
     + "</p>"
     + "</div>"
-    + "<div class='col s8 offest-s3'"
+    + "<div class='col s8 offest-s3'>"
     + "<p>"
     + "This is where event data from event types will go" //fix this
     + "</p>"
