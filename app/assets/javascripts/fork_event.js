@@ -13,12 +13,9 @@ $("<li>"
 + forkEvent.actor.avatar_url
 + ">"
 + "</a>"
-+ "<div class='col s6'>"
-+ new Date(Date.parse(forkEvent.created_at)).getMonth()
-+ "/"
-+ new Date(Date.parse(forkEvent.created_at)).getDate()
-+ "/"
-+ new Date(Date.parse(forkEvent.created_at)).getFullYear()
++ "<div class='col s7'>"
++ timeSince(new Date(Date.parse(deleteEvent.created_at)))
++ " ago"
 + "</div>"
 + "</div>"
 + "</p>"
