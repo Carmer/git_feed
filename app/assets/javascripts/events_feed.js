@@ -68,6 +68,9 @@ var printEvents = function(events) {
       printWatchEvent(events[i])
     }
 
+    else if (events[i].type === "MemberEvent") {
+      printMemberEvent(events[i])
+    }
     else {
     $("<li>"
     + "<div class='card'>"
