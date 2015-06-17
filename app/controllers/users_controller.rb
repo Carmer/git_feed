@@ -10,13 +10,13 @@ class UsersController < ApplicationController
   end
 
   def received_events
-    @user = User.find_by!(login: params[:id])
+    @user = User.find_by!(id: params[:id])
 
     respond_with :json, @user.github_received_events[params[:page].to_i || 1]
   end
 
   def events
-    @user = User.find_by!(login: params[:id])
+    @user = User.find_by!(id: params[:id])
 
     respond_with :json, @user.github_events[params[:page].to_i || 1]
   end

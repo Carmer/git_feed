@@ -1,6 +1,6 @@
 $(function() {
   $.ajax({
-    url: "/users/" + $("#user-page").data("userLogin") + "/received_events",
+    url: "/users/" + $("#user-page").data("userId") + "/received_events",
     dataType: "json",
     success: function(success) {
       collectEvents(success)
@@ -10,7 +10,7 @@ $(function() {
       }
   });
   $.ajax({
-    url: "/users/" + $("#user-page").data("userLogin") + "/events",
+    url: "/users/" + $("#user-page").data("userId") + "/events",
     success: function(success) {
       collectEvents(success)
     },
