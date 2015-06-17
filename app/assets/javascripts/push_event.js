@@ -23,7 +23,11 @@ $("<li>"
 + "</div>"
 + "</p>"
 + "<h5>"
++ "<a href='http://github.com/"
 + pushEvent.actor.login
++ "'>"
++ pushEvent.actor.login
++ "</a>"
 + " - "
 + "pushed "
 + pushEvent.payload.size

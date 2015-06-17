@@ -23,7 +23,11 @@ $("<li>"
 + "</div>"
 + "</p>"
 + "<h5>"
++ "<a href='http://github.com/"
 + createEvent.actor.login
++ "'>"
++ createEvent.actor.login
++ "</a>"
 + " - "
 + "created a "
 + createEvent.payload.ref_type

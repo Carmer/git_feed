@@ -23,7 +23,11 @@ $("<li>"
 + "</div>"
 + "</p>"
 + "<h5>"
++ "<a href='http://github.com/"
 + issuesEvent.actor.login
++ "'>"
++ issuesEvent.actor.login
++ "</a>"
 + " - "
 + issuesEvent.payload.action
 + " an issue for the repository "

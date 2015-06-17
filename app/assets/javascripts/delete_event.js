@@ -23,7 +23,11 @@ var printDeleteEvent = function(deleteEvent) {
   + "</div>"
   + "</p>"
   + "<h5>"
+  + "<a href='http://github.com/"
   + deleteEvent.actor.login
+  + "'>"
+  + deleteEvent.actor.login
+  + "</a>"
   + " - "
   + "deleted a "
   + deleteEvent.payload.ref_type

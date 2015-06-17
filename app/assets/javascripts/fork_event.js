@@ -23,7 +23,11 @@ $("<li>"
 + "</div>"
 + "</p>"
 + "<h5>"
++ "<a href='http://github.com/"
 + forkEvent.actor.login
++ "'>"
++ forkEvent.actor.login
++ "</a>"
 + " - "
 + "forked the repository: "
 + forkEvent.repo.name

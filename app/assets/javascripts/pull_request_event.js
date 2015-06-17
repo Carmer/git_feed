@@ -23,7 +23,11 @@ $("<li>"
 + "</div>"
 + "</p>"
 + "<h5>"
++ "<a href='http://github.com/"
 + pullRequestEvent.actor.login
++ "'>"
++ pullRequestEvent.actor.login
++ "</a>"
 + " - "
 + "submited a pull request for: "
 + pullRequestEvent.payload.pull_request.title

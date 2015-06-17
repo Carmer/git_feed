@@ -23,7 +23,11 @@ $("<li>"
 + "</div>"
 + "</p>"
 + "<h5>"
++ "<a href='http://github.com/"
 + issueCommentEvent.actor.login
++ "'>"
++ issueCommentEvent.actor.login
++ "</a>"
 + " - "
 + "commented on the issue: "
 + issueCommentEvent.payload.issue.title

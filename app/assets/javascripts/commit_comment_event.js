@@ -17,7 +17,11 @@ $("<li>"
 + "</p>"
 + "<div class='col s8 offest-s3'>"
 + "<h5>"
++ "<a href='http://github.com/"
 + commitCommentEvent.actor.login
++ "'>"
++ commitCommentEvent.actor.login
++ "</a>"
 + " - "
 + "made a comment on a commit in the"
 + commitCommentEvent.repo.name.split("/")[1]
