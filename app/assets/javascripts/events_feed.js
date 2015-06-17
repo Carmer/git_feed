@@ -1,6 +1,6 @@
 $(function() {
   $.ajax({
-    url: "/users/" + $("#user-page").data("userId") + "/received_events",
+    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=1&per_page=100",
     dataType: "json",
     success: function(success) {
       collectEvents(success)
@@ -10,7 +10,7 @@ $(function() {
       }
   });
   $.ajax({
-    url: "/users/" + $("#user-page").data("userId") + "/events",
+    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/events?page=1&per_page=100",
     success: function(success) {
       collectEvents(success)
     },

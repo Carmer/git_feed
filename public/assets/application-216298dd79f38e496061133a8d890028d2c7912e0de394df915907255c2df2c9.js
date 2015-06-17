@@ -11594,9 +11594,215 @@ return jQuery;
   };
 
 }).call(this);
+var printCommitCommentEvent = function(commitCommentEvent){
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='"
++ commitCommentEvent.actor.url
++ "'>"
++ "<img class='circle img-avatar' src="
++ commitCommentEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(commitCommentEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<div class='col s8 offest-s3'>"
++ "<h5>"
++ "<a href='http://github.com/"
++ commitCommentEvent.actor.login
++ "'>"
++ commitCommentEvent.actor.login
++ "</a>"
++ " - "
++ "made a comment on a commit in the"
++ commitCommentEvent.repo.name.split("/")[1]
++ "repository"
++ "</h5>"
++ "<p>"
++ "<a href='"
++ commitCommentEvent.repo.url
++ "'> Repository: "
++ commitCommentEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4'>"
++ "Commit History: "
++ commitCommentEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
+var printCreateEvent = function(createEvent) {
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right repo-data-name' data-repo-name='"
++ createEvent.repo.name
++ "'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='http://github.com/"
++ createEvent.actor.login
++ "'>"
++ "<img class='circle img-avatar' src="
++ createEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(createEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<h5>"
++ "<a href='http://github.com/"
++ createEvent.actor.login
++ "'>"
++ createEvent.actor.login
++ "</a>"
++ " - "
++ "created a "
++ createEvent.payload.ref_type
++ "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
++ "<p>"
++  "Repository: "
++ "<a href='http://github.com/"
++ createEvent.repo.name
++ "'>"
++ createEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4'>"
++ "Commit History: "
++ createEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
+var printDeleteEvent = function(deleteEvent) {
+  $("<li>"
+  + "<div class='card'>"
+  + "<div class='card-content'>"
+  + "<span class='card-title activator grey-text text-darken-4 event-title'>"
+  + "<i class='mdi-navigation-more-vert right'></i></span>"
+  + "<div class='waves-effect waves-block waves-light col s3'>"
+  + "<p>"
+  + "<a href='http://github.com/"
+  + deleteEvent.actor.login
+  + "'>"
+  + "<img class='circle img-avatar' src="
+  + deleteEvent.actor.avatar_url
+  + ">"
+  + "</a>"
+  + "<div class='col s8'>"
+  + timeSince(new Date(Date.parse(deleteEvent.created_at)))
+  + " ago"
+  + "</div>"
+  + "</div>"
+  + "</p>"
+  + "<h5>"
+  + "<a href='http://github.com/"
+  + deleteEvent.actor.login
+  + "'>"
+  + deleteEvent.actor.login
+  + "</a>"
+  + " - "
+  + "deleted a "
+  + deleteEvent.payload.ref_type
+  + "</h5>"
+  + "<div class='col s9 offest-s3 v-align'>"
+  + "<p>"
+  +  "Repository: "
+  + "<a href='http://github.com/"
+  + deleteEvent.repo.name
+  + "'>"
+  + deleteEvent.repo.name
+  + "</a>"
+  + "</p>"
+  + "</div>"
+  + "</div>"
+  + "<div class='card-reveal'>"
+  + "<span class='card-title grey-text text-darken-4'>"
+  + "Commit History: "
+  + deleteEvent.repo.name
+  + "<i class='mdi-navigation-close right'></i>"
+  + "</span>"
+  + "<table>"
+  + "<thead>"
+  + "<tr>"
+  + "<th data-field='name'>Name</th>"
+  + "<th data-field='number commits'>Number of Commits</th>"
+  + "<th data-field='pertage commits'>Percent Total Contribution</th>"
+  + "</tr>"
+  + "</thead>"
+  + "<tbody>"
+  + "<tr class='table-commiter-names'>"
+  + "</tr>"
+  + "<tr class='table-commit-count'>"
+  + "</tr>"
+  + "<tr class='table-commit-percentage'>"
+  + "</tr>"
+  + "</tbody>"
+  + "</table>"
+  + "</div>"
+  + "</li>").appendTo(".event-feed-list");
+  };
 $(function() {
   $.ajax({
-    url: "https://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=1&per_page=100",
+    url: "/users/" + $("#user-page").data("userId") + "/received_events",
     dataType: "json",
     success: function(success) {
       collectEvents(success)
@@ -11606,7 +11812,7 @@ $(function() {
       }
   });
   $.ajax({
-    url: "https://api.github.com/users/" + $("#user-page").data("userLogin") + "/events?page=1&per_page=100",
+    url: "/users/" + $("#user-page").data("userId") + "/events",
     success: function(success) {
       collectEvents(success)
     },
@@ -11631,11 +11837,60 @@ var collectEvents = function(eventsInfo) {
 
 var printEvents = function(events) {
   for (i = 0; i < events.length; i ++ ){
+
+    if ( events[i].type === "CreateEvent") {
+      printCreateEvent(events[i])
+    }
+
+    else if (events[i].type === "DeleteEvent") {
+      printDeleteEvent(events[i])
+    }
+
+    else if (events[i].type === "PushEvent") {
+      printPushEvent(events[i])
+    }
+
+    else if (events[i].type === "PullRequestEvent") {
+      printPullRequestEvent(events[i])
+    }
+
+    else if (events[i].type === "IssuesEvent") {
+      printIssuesEvent(events[i])
+    }
+
+    else if (events[i].type === "IssueCommentEvent") {
+      printIssueCommentEvent(events[i])
+    }
+
+    else if (events[i].type === "ForkEvent") {
+      printForkEvent(events[i])
+    }
+
+    else if (events[i].type === "WatchEvent") {
+      printWatchEvent(events[i])
+    }
+
+    else if (events[i].type === "MemberEvent") {
+      printMemberEvent(events[i])
+    }
+    else {
     $("<li>"
     + "<div class='card'>"
     + "<div class='card-content'>"
     + "<span class='card-title activator grey-text text-darken-4 event-title'>"
     + "<i class='mdi-navigation-more-vert right'></i></span>"
+    + "<div class='waves-effect waves-block waves-light col s3'>"
+    + "<p>"
+    + "<a href='"
+    + events[i].actor.url
+    + "'>"
+    + "<img class='circle img-avatar' src="
+    + events[i].actor.avatar_url
+    + ">"
+    + "</a>"
+    + "</div>"
+    + "</p>"
+    + "<div class='col s8 offest-s3'>"
     + "<h5>"
     + events[i].actor.login
     + " - "
@@ -11643,26 +11898,14 @@ var printEvents = function(events) {
     + " - "
     + events[i].repo.name.split("/")[1]
     + "</h5>"
-    + "<a href="
+    + "<p>"
+    + "<a href='"
     + events[i].repo.url
-    + "> Repository: "
+    + "'> Repository: "
     + events[i].repo.name
     + "</a>"
-    + "</div>"
-    + "<div class='waves-effect waves-block waves-light col s3'>"
-    + "<p>"
-    + "<a href="
-    + events[i].actor.url
-    + ">"
-    + "<img class='circle img-avatar' src="
-    + events[i].actor.avatar_url
-    + "</a>"
     + "</p>"
     + "</div>"
-    + "<div class='col s8 offest-s3'"
-    + "<p>"
-    + "This is where event data from event types will go" //fix this
-    + "</p>"
     + "</div>"
     + "<div class='card-reveal'>"
     + "<span class='card-title grey-text text-darken-4'>"
@@ -11675,8 +11918,578 @@ var printEvents = function(events) {
     + "</div>"
     + "</li>").appendTo(".event-feed-list");
   };
+  };
 }
 ;
+var printForkEvent = function(forkEvent) {
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='http://github.com/"
++ forkEvent.actor.login
++ "'>"
++ "<img class='circle img-avatar' src="
++ forkEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(forkEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<h5>"
++ "<a href='http://github.com/"
++ forkEvent.actor.login
++ "'>"
++ forkEvent.actor.login
++ "</a>"
++ " - "
++ "forked the repository: "
++ forkEvent.repo.name
++ "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
++ "<p>"
++  "Repository: "
++ "<a href='http://github.com/"
++ forkEvent.repo.name
++ "'>"
++ forkEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4'>"
++ "Commit History: "
++ forkEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
+var printIssueCommentEvent = function(issueCommentEvent) {
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='http://github.com/"
++ issueCommentEvent.actor.login
++ "'>"
++ "<img class='circle img-avatar' src="
++ issueCommentEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(issueCommentEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<h5>"
++ "<a href='http://github.com/"
++ issueCommentEvent.actor.login
++ "'>"
++ issueCommentEvent.actor.login
++ "</a>"
++ " - "
++ "commented on the issue: "
++ issueCommentEvent.payload.issue.title
++ " for the repository "
++ issueCommentEvent.repo.name
++ "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
++ "<p>"
++  "Repository: "
++ "<a href='http://github.com/"
++ issueCommentEvent.repo.name
++ "'>"
++ issueCommentEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4'>"
++ "Commit History: "
++ issueCommentEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
+var printIssuesEvent = function(issuesEvent) {
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='http://github.com/"
++ issuesEvent.actor.login
++ "'>"
++ "<img class='circle img-avatar' src="
++ issuesEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s6'>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(issuesEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<h5>"
++ "<a href='http://github.com/"
++ issuesEvent.actor.login
++ "'>"
++ issuesEvent.actor.login
++ "</a>"
++ " - "
++ issuesEvent.payload.action
++ " an issue for the repository "
++ issuesEvent.repo.name
++ "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
++ "<p>"
++  "Repository: "
++ "<a href='http://github.com/"
++ issuesEvent.repo.name
++ "'>"
++ issuesEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4'>"
++ "Commit History: "
++ issuesEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
+var printMemberEvent = function(memberEvent) {
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='http://github.com/"
++ memberEvent.actor.login
++ "'>"
++ "<img class='circle img-avatar' src="
++ memberEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(memberEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<h5>"
++ "<a href='http://github.com/"
++ memberEvent.actor.login
++ "'>"
++ memberEvent.actor.login
++ "</a>"
++ " - "
++ "added "
++ "<a href='http://github.com/"
++ memberEvent.payload.member.login
++ "'>"
++ memberEvent.payload.member.login
++ "</a>"
++ " as a member of the "
++ memberEvent.repo.name
++ " repository"
++ "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
++ "<p>"
++  "Repository: "
++ "<a href='http://github.com/"
++ memberEvent.repo.name
++ "'>"
++ memberEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4 center-align'>"
++ "Commit History: "
++ memberEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
+var printPullRequestEvent = function(pullRequestEvent) {
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='http://github.com/"
++ pullRequestEvent.actor.login
++ "'>"
++ "<img class='circle img-avatar' src="
++ pullRequestEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(pullRequestEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<h5>"
++ "<a href='http://github.com/"
++ pullRequestEvent.actor.login
++ "'>"
++ pullRequestEvent.actor.login
++ "</a>"
++ " - "
++ "submited a pull request for: "
++ pullRequestEvent.payload.pull_request.title
++ " to the repository "
++ pullRequestEvent.repo.full_name
++ "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
++ "<p>"
++  "Repository: "
++ "<a href='http://github.com/"
++ pullRequestEvent.repo.name
++ "'>"
++ pullRequestEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4'>"
++ "Commit History: "
++ pullRequestEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
+var printPushEvent = function(pushEvent) {
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='http://github.com/"
++ pushEvent.actor.login
++ "'>"
++ "<img class='circle img-avatar' src="
++ pushEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(pushEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<h5>"
++ "<a href='http://github.com/"
++ pushEvent.actor.login
++ "'>"
++ pushEvent.actor.login
++ "</a>"
++ " - "
++ "pushed "
++ pushEvent.payload.size
++ " commits to the "
++ pushEvent.payload.ref.split("/")[2]
++ " branch"
++ "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
++ "<p>"
++  "Repository: "
++ "<a href='http://github.com/"
++ pushEvent.repo.name
++ "'>"
++ pushEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4'>"
++ "Commit History: "
++ pushEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
+$( ".repo-data-name" ).on( "click", function() {
+  $.ajax({
+    url: "https://api.github.com/repos/" + $(this).data("repoName") + "/commits",
+    dataType: "json",
+    success: function(success) {
+      collectCommits(success)
+    },
+    error: function(error) {
+      alert(error)
+    }
+    .done( function() {
+      printCommits(commitList)
+    })
+  });
+});
+
+
+var commitList = []
+
+var collectCommits = function(commitInfo) {
+  for ( i = 0 ; i > commitInfo.length ; i ++) {
+    commitList.push(commitInfo[i])
+  }
+};
+
+var commiterCounts = {}
+
+
+var printCommits = function(data) {
+
+  for (i = 0 ; i > data.length ; i ++) {
+    commiterCounts[data[i].commit.commiter.name] = 1 + (commiterCounts[data[i]] || 0 )
+  };
+  $.each( commiterCounts, function( name, count)  {
+
+    console.log(name)
+
+    // $("<td>"
+    // + name
+    // + "</td>").appendTo(".table-commiter-names")
+
+    // $("<td>"
+    // + count / commitList.length
+    // + "</td>")/appendTo(".table-commit-percentage")
+  });
+
+
+};
+function timeSince(date) {
+
+    var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+}
+;
+var printWatchEvent = function(watchEvent) {
+$("<li>"
++ "<div class='card'>"
++ "<div class='card-content'>"
++ "<span class='card-title activator grey-text text-darken-4 event-title'>"
++ "<i class='mdi-navigation-more-vert right'></i></span>"
++ "<div class='waves-effect waves-block waves-light col s3'>"
++ "<p>"
++ "<a href='http://github.com/"
++ watchEvent.actor.login
++ "'>"
++ "<img class='circle img-avatar' src="
++ watchEvent.actor.avatar_url
++ ">"
++ "</a>"
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(watchEvent.created_at)))
++ " ago"
++ "</div>"
++ "</div>"
++ "</p>"
++ "<h5>"
++ "<a href='http://github.com/"
++ watchEvent.actor.login
++ "'>"
++ watchEvent.actor.login
++ "</a>"
++ " - "
++ watchEvent.payload.action
++ " watching "
++ watchEvent.repo.name
++ "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
++ "<p>"
++  "Repository: "
++ "<a href='http://github.com/"
++ watchEvent.repo.name
++ "'>"
++ watchEvent.repo.name
++ "</a>"
++ "</p>"
++ "</div>"
++ "</div>"
++ "<div class='card-reveal'>"
++ "<span class='card-title grey-text text-darken-4'>"
++ "Commit History: "
++ watchEvent.repo.name
++ "<i class='mdi-navigation-close right'></i>"
++ "</span>"
++ "<table>"
++ "<thead>"
++ "<tr>"
++ "<th data-field='name'>Name</th>"
++ "<th data-field='number commits'>Number of Commits</th>"
++ "<th data-field='pertage commits'>Percent Total Contribution</th>"
++ "</tr>"
++ "</thead>"
++ "<tbody>"
++ "<tr class='table-commiter-names'>"
++ "</tr>"
++ "<tr class='table-commit-count'>"
++ "</tr>"
++ "<tr class='table-commit-percentage'>"
++ "</tr>"
++ "</tbody>"
++ "</table>"
++ "</div>"
++ "</li>").appendTo(".event-feed-list");
+};
 /*
  * jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/
  *
