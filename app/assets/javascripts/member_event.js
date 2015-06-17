@@ -1,4 +1,4 @@
-var printCommitCommentEvent = function(commitCommentEvent){
+var printMemberEvent = function(memberEvent) {
 $("<li>"
 + "<div class='card'>"
 + "<div class='card-content'>"
@@ -6,36 +6,43 @@ $("<li>"
 + "<i class='mdi-navigation-more-vert right'></i></span>"
 + "<div class='waves-effect waves-block waves-light col s3'>"
 + "<p>"
-+ "<a href='"
-+ commitCommentEvent.actor.url
++ "<a href='http://github.com/"
++ memberEvent.actor.login
 + "'>"
 + "<img class='circle img-avatar' src="
-+ commitCommentEvent.actor.avatar_url
++ memberEvent.actor.avatar_url
 + ">"
 + "</a>"
 + "<div class='col s8'>"
-+ timeSince(new Date(Date.parse(commitCommentEvent.created_at)))
++ timeSince(new Date(Date.parse(memberEvent.created_at)))
 + " ago"
 + "</div>"
 + "</div>"
 + "</p>"
-+ "<div class='col s8 offest-s3'>"
 + "<h5>"
 + "<a href='http://github.com/"
-+ commitCommentEvent.actor.login
++ memberEvent.actor.login
 + "'>"
-+ commitCommentEvent.actor.login
++ memberEvent.actor.login
 + "</a>"
 + " - "
-+ "made a comment on a commit in the"
-+ commitCommentEvent.repo.name.split("/")[1]
-+ "repository"
++ "added "
++ "<a href='http://github.com/"
++ memberEvent.payload.member.login
++ "'>"
++ memberEvent.payload.member.login
++ "</a>"
++ " as a member of the "
++ memberEvent.repo.name
++ " repository"
 + "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
 + "<p>"
-+ "<a href='"
-+ commitCommentEvent.repo.url
-+ "'> Repository: "
-+ commitCommentEvent.repo.name
++  "Repository: "
++ "<a href='http://github.com/"
++ memberEvent.repo.name
++ "'>"
++ memberEvent.repo.name
 + "</a>"
 + "</p>"
 + "</div>"

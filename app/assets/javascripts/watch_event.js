@@ -1,4 +1,4 @@
-var printCommitCommentEvent = function(commitCommentEvent){
+var printWatchEvent = function(watchEvent) {
 $("<li>"
 + "<div class='card'>"
 + "<div class='card-content'>"
@@ -6,36 +6,37 @@ $("<li>"
 + "<i class='mdi-navigation-more-vert right'></i></span>"
 + "<div class='waves-effect waves-block waves-light col s3'>"
 + "<p>"
-+ "<a href='"
-+ commitCommentEvent.actor.url
++ "<a href='http://github.com/"
++ watchEvent.actor.login
 + "'>"
 + "<img class='circle img-avatar' src="
-+ commitCommentEvent.actor.avatar_url
++ watchEvent.actor.avatar_url
 + ">"
 + "</a>"
 + "<div class='col s8'>"
-+ timeSince(new Date(Date.parse(commitCommentEvent.created_at)))
++ timeSince(new Date(Date.parse(watchEvent.created_at)))
 + " ago"
 + "</div>"
 + "</div>"
 + "</p>"
-+ "<div class='col s8 offest-s3'>"
 + "<h5>"
 + "<a href='http://github.com/"
-+ commitCommentEvent.actor.login
++ watchEvent.actor.login
 + "'>"
-+ commitCommentEvent.actor.login
++ watchEvent.actor.login
 + "</a>"
 + " - "
-+ "made a comment on a commit in the"
-+ commitCommentEvent.repo.name.split("/")[1]
-+ "repository"
++ watchEvent.payload.action
++ " watching "
++ watchEvent.repo.name
 + "</h5>"
++ "<div class='col s9 offest-s3 v-align'>"
 + "<p>"
-+ "<a href='"
-+ commitCommentEvent.repo.url
-+ "'> Repository: "
-+ commitCommentEvent.repo.name
++  "Repository: "
++ "<a href='http://github.com/"
++ watchEvent.repo.name
++ "'>"
++ watchEvent.repo.name
 + "</a>"
 + "</p>"
 + "</div>"

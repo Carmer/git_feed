@@ -13,19 +13,20 @@ $("<li>"
 + createEvent.actor.avatar_url
 + ">"
 + "</a>"
-+ "<div class='col s6 offset-s1'>"
-+ new Date(Date.parse(createEvent.created_at)).getMonth()
-+ "/"
-+ new Date(Date.parse(createEvent.created_at)).getDate()
-+ "/"
-+ new Date(Date.parse(createEvent.created_at)).getFullYear()
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(createEvent.created_at)))
++ " ago"
 + "</div>"
 + "</div>"
 + "</p>"
 + "<h5>"
++ "<a href='http://github.com/"
 + createEvent.actor.login
++ "'>"
++ createEvent.actor.login
++ "</a>"
 + " - "
-+ "Created a "
++ "created a "
 + createEvent.payload.ref_type
 + "</h5>"
 + "<div class='col s9 offest-s3 v-align'>"
@@ -36,8 +37,6 @@ $("<li>"
 + "'>"
 + createEvent.repo.name
 + "</a>"
-+ "<br>"
-+ "This is where event data from event types will go" //fix this
 + "</p>"
 + "</div>"
 + "</div>"

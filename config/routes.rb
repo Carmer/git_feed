@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     member do
       get "/events", to: 'users#events', as: :events
-      get "/received_events", to: 'users#events', as: :received_events
+      get "/received_events", to: 'users#received_events', as: :received_events
+      get "/commits", to: 'users#commits', as: :commits
     end
   end
 

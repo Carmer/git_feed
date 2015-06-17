@@ -1,6 +1,6 @@
 $(function() {
   $.ajax({
-    url: "/users/" + $("#user-page").data("userLogin") + "/received_events",
+    url: "/users/" + $("#user-page").data("userId") + "/received_events",
     dataType: "json",
     success: function(success) {
       collectEvents(success)
@@ -10,7 +10,7 @@ $(function() {
       }
   });
   $.ajax({
-    url: "/users/" + $("#user-page").data("userLogin") + "/events",
+    url: "/users/" + $("#user-page").data("userId") + "/events",
     success: function(success) {
       collectEvents(success)
     },
@@ -48,6 +48,29 @@ var printEvents = function(events) {
       printPushEvent(events[i])
     }
 
+    else if (events[i].type === "PullRequestEvent") {
+      printPullRequestEvent(events[i])
+    }
+
+    else if (events[i].type === "IssuesEvent") {
+      printIssuesEvent(events[i])
+    }
+
+    else if (events[i].type === "IssueCommentEvent") {
+      printIssueCommentEvent(events[i])
+    }
+
+    else if (events[i].type === "ForkEvent") {
+      printForkEvent(events[i])
+    }
+
+    else if (events[i].type === "WatchEvent") {
+      printWatchEvent(events[i])
+    }
+
+    else if (events[i].type === "MemberEvent") {
+      printMemberEvent(events[i])
+    }
     else {
     $("<li>"
     + "<div class='card'>"
@@ -79,8 +102,6 @@ var printEvents = function(events) {
     + "'> Repository: "
     + events[i].repo.name
     + "</a>"
-    + "<br>"
-    + "This is where event data from event types will go" //fix this
     + "</p>"
     + "</div>"
     + "</div>"

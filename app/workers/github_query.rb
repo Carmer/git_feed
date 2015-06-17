@@ -3,15 +3,15 @@ class GithubQuery
 
   NUMBER_OF_PAGES = 5
 
-  def perform(user_login)
+  def perform(user_login, token)
     user = User.find_by(login: user_login)
 
     NUMBER_OF_PAGES.times do |i|
-      user.github_received_events << Github::API.new.received_events(user_login, i).body
+      user.github_received_events << Github::API.new.received_events(user_login, i, 100, token).body
     end
 
     NUMBER_OF_PAGES.times do |i|
-      user.github_events << Github::API.new.events(user_login, i).body
+      user.github_events << Github::API.new.events(user_login, i, 100, token).body
     end
 
     user.save

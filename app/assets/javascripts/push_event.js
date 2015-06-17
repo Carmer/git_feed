@@ -13,19 +13,20 @@ $("<li>"
 + pushEvent.actor.avatar_url
 + ">"
 + "</a>"
-+ "<div class='col s6 offset-s1'>"
-+ new Date(Date.parse(pushEvent.created_at)).getMonth()
-+ "/"
-+ new Date(Date.parse(pushEvent.created_at)).getDate()
-+ "/"
-+ new Date(Date.parse(pushEvent.created_at)).getFullYear()
++ "<div class='col s8'>"
++ timeSince(new Date(Date.parse(pushEvent.created_at)))
++ " ago"
 + "</div>"
 + "</div>"
 + "</p>"
 + "<h5>"
++ "<a href='http://github.com/"
 + pushEvent.actor.login
++ "'>"
++ pushEvent.actor.login
++ "</a>"
 + " - "
-+ "Pushed "
++ "pushed "
 + pushEvent.payload.size
 + " commits to the "
 + pushEvent.payload.ref.split("/")[2]
@@ -39,8 +40,6 @@ $("<li>"
 + "'>"
 + pushEvent.repo.name
 + "</a>"
-+ "<br>"
-+ "This is where event data from event types will go" //fix this
 + "</p>"
 + "</div>"
 + "</div>"
