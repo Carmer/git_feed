@@ -19,14 +19,13 @@ $(function() {
     }
   })
   .done( function() {
-    printEvents(eventList)
+    printGenericEvent(eventList)
   });
 });
 
 var eventList = []
 
 var collectEvents = function(eventsInfo) {
-
   for (i = 0; i < eventsInfo.length; i ++) {
     eventList.push(eventsInfo[i])
   }
