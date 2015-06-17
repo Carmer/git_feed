@@ -13,7 +13,7 @@ $("<li>"
 + commitCommentEvent.actor.avatar_url
 + ">"
 + "</a>"
-+ "<div class='col s7'>"
++ "<div class='col s8'>"
 + timeSince(new Date(Date.parse(commitCommentEvent.created_at)))
 + " ago"
 + "</div>"

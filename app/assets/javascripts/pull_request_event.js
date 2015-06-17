@@ -13,7 +13,7 @@ $("<li>"
 + pullRequestEvent.actor.avatar_url
 + ">"
 + "</a>"
-+ "<div class='col s7'>"
++ "<div class='col s8'>"
 + timeSince(new Date(Date.parse(pullRequestEvent.created_at)))
 + " ago"
 + "</div>"

@@ -64,6 +64,10 @@ var printEvents = function(events) {
       printForkEvent(events[i])
     }
 
+    else if (events[i].type === "WatchEvent") {
+      printWatchEvent(events[i])
+    }
+
     else {
     $("<li>"
     + "<div class='card'>"
