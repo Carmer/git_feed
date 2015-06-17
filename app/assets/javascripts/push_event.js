@@ -14,7 +14,7 @@ $("<li>"
 + ">"
 + "</a>"
 + "<div class='col s7'>"
-+ timeSince(new Date(Date.parse(deleteEvent.created_at)))
++ timeSince(new Date(Date.parse(pushEvent.created_at)))
 + " ago"
 + "</div>"
 + "</div>"
