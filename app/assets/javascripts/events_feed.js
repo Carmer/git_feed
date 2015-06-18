@@ -19,7 +19,9 @@ $(function() {
     }
   })
   .done( function() {
-    printGenericEvent(eventList)
+    printGenericEvent(eventList);
+    populateCommitHistory();
+    filterEvents();
   });
 });
 

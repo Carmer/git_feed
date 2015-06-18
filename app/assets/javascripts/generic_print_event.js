@@ -1,7 +1,11 @@
 
 var printGenericEvent = function(events) {
   for (i = 0; i < events.length; i ++ ) {
-    $("<li>"
+    $("<li data-event-type='"
+    + events[i].type
+    +"' class="
+    + events[i].type
+    + ">"
     + "<div class='card'>"
     + "<div class='card-content'>"
     + "<span class='card-title activator grey-text text-darken-4 event-title'>"
@@ -35,7 +39,7 @@ var printGenericEvent = function(events) {
     + "<div class='col s9 offest-s3 v-align'>"
     + "<p>"
     +  "Repository: "
-    + "<a href='http://github.com/"
+    + "<a class='repo-link' href='http://github.com/"
     + events[i].repo.name
     + "'>"
     + events[i].repo.name
@@ -49,15 +53,15 @@ var printGenericEvent = function(events) {
     + events[i].repo.name
     + "<i class='mdi-navigation-close right'></i>"
     + "</span>"
-    + "<table>"
+    + "<table class='hoverable'>"
     + "<thead>"
     + "<tr>"
-    + "<th data-field='name'>Name</th>"
+    + "<th data-field='name'>Commiter's Name</th>"
     + "<th data-field='number commits'>Number of Commits</th>"
     + "<th data-field='pertage commits'>Percent Total Contribution</th>"
     + "</tr>"
     + "</thead>"
-    + "<tbody>"
+    + "<tbody class='commit-table'>"
     + "</tbody>"
     + "</table>"
     + "</div>"
