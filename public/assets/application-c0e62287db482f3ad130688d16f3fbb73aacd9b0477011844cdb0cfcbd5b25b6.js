@@ -11596,7 +11596,7 @@ return jQuery;
 }).call(this);
 $(function() {
   $.ajax({
-    url: "https://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=1&per_page=100",
+    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=1&per_page=100",
     dataType: "json",
     success: function(success) {
       collectEvents(success)
@@ -11606,7 +11606,7 @@ $(function() {
       }
   });
   $.ajax({
-    url: "https://api.github.com/users/" + $("#user-page").data("userLogin") + "/events?page=1&per_page=100",
+    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/events?page=1&per_page=100",
     success: function(success) {
       collectEvents(success)
     },
@@ -11615,66 +11615,149 @@ $(function() {
     }
   })
   .done( function() {
-    printEvents(eventList)
+    printGenericEvent(eventList)
   });
 });
 
 var eventList = []
 
 var collectEvents = function(eventsInfo) {
-
   for (i = 0; i < eventsInfo.length; i ++) {
     eventList.push(eventsInfo[i])
   }
 };
 
-
-var printEvents = function(events) {
-  for (i = 0; i < events.length; i ++ ){
+var printGenericEvent = function(events) {
+  for (i = 0; i < events.length; i ++ ) {
     $("<li>"
     + "<div class='card'>"
     + "<div class='card-content'>"
     + "<span class='card-title activator grey-text text-darken-4 event-title'>"
-    + "<i class='mdi-navigation-more-vert right'></i></span>"
-    + "<h5>"
-    + events[i].actor.login
-    + " - "
-    + events[i].type
-    + " - "
-    + events[i].repo.name.split("/")[1]
-    + "</h5>"
-    + "<a href="
-    + events[i].repo.url
-    + "> Repository: "
+    + "<i class='mdi-navigation-more-vert right repo-data-name' data-repo-name='"
     + events[i].repo.name
-    + "</a>"
-    + "</div>"
+    + "'></i></span>"
     + "<div class='waves-effect waves-block waves-light col s3'>"
     + "<p>"
-    + "<a href="
-    + events[i].actor.url
-    + ">"
+    + "<a href='http://github.com/"
+    + events[i].actor.login
+    + "'>"
     + "<img class='circle img-avatar' src="
     + events[i].actor.avatar_url
+    + ">"
+    + "</a>"
+    + "<div class='col s8'>"
+    + timeSince(new Date(Date.parse(events[i].created_at)))
+    + " ago"
+    + "</div>"
+    + "</div>"
+    + "</p>"
+    + "<h5>"
+    + "<a href='http://github.com/"
+    + events[i].actor.login
+    + "'>"
+    + events[i].actor.login
+    + "</a>"
+    + " - "
+    + naturalLanguageEventInfo(events[i])
+    + "</h5>"
+    + "<div class='col s9 offest-s3 v-align'>"
+    + "<p>"
+    +  "Repository: "
+    + "<a href='http://github.com/"
+    + events[i].repo.name
+    + "'>"
+    + events[i].repo.name
     + "</a>"
     + "</p>"
     + "</div>"
-    + "<div class='col s8 offest-s3'"
-    + "<p>"
-    + "This is where event data from event types will go" //fix this
-    + "</p>"
     + "</div>"
     + "<div class='card-reveal'>"
     + "<span class='card-title grey-text text-darken-4'>"
-    + "Card event info placeholder" //fix this
+    + "Commit History: "
+    + events[i].repo.name
     + "<i class='mdi-navigation-close right'></i>"
     + "</span>"
-    + "<p>"
-    + "Here is a placeholder paragraph. And another sentence. And another sentence. And another sentence. And another sentence."
-    + "</p>"
+    + "<table>"
+    + "<thead>"
+    + "<tr>"
+    + "<th data-field='name'>Name</th>"
+    + "<th data-field='number commits'>Number of Commits</th>"
+    + "<th data-field='pertage commits'>Percent Total Contribution</th>"
+    + "</tr>"
+    + "</thead>"
+    + "<tbody>"
+    + "</tbody>"
+    + "</table>"
     + "</div>"
     + "</li>").appendTo(".event-feed-list");
+  }
+};
+
+
+var naturalLanguageEventInfo = function(eventType) {
+
+    if ( eventType.type === "CreateEvent") {
+      return "created a " + eventType.payload.ref_type
+    }
+
+    else if (eventType.type === "DeleteEvent") {
+      return "deleted a " + eventType.payload.ref_type
+    }
+
+    else if (eventType.type === "PushEvent") {
+      return "pushed " + eventType.payload.size + " commits to the " + eventType.payload.ref.split("/")[2] + " branch"
+    }
+
+    else if (eventType.type === "PullRequestEvent") {
+      return "submited a pull request for: " + eventType.payload.pull_request.title + " to the repository " + eventType.repo.full_name
+    }
+
+    else if (eventType.type === "IssuesEvent") {
+      return eventType.payload.action + " an issue for the repository " + eventType.repo.name
+    }
+
+    else if (eventType.type === "IssueCommentEvent") {
+      return "commented on the issue: " + eventType.payload.issue.title + " for the repository " + eventType.repo.name
+    }
+
+    else if (eventType.type === "ForkEvent") {
+      return "forked the repository: " + eventType.repo.name
+    }
+
+    else if (eventType.type === "WatchEvent") {
+      return eventType.payload.action + " watching " + eventType.repo.name
+    }
+
+    else if (eventType.type === "MemberEvent") {
+      return "added " + "<a href='http://github.com/" + eventType.payload.member.login + "'>" + eventType.payload.member.login + "</a>" + " as a member of the " + eventType.repo.name + " repository"
+    }
   };
+function timeSince(date) {
+
+    var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
 }
 ;
 /*
