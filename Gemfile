@@ -21,6 +21,7 @@ gem 'sinatra', require: false
 gem 'httparty'
 gem 'foreman'
 gem 'skylight'
+gem 'puma'
 
 
 group :development, :test do
