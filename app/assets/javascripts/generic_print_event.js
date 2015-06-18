@@ -7,6 +7,10 @@ var printGenericEvent = function(events) {
     + events[i].type
     + ">"
     + "<div class='card'>"
+    + "<div class='col s6 offset-s3'>"
+    + timeSince(new Date(Date.parse(events[i].created_at)))
+    + " ago"
+    + "</div>"
     + "<div class='card-content'>"
     + "<span class='card-title activator grey-text text-darken-4 event-title'>"
     + "<i class='mdi-navigation-more-vert right repo-data-name' data-repo-name='"
@@ -21,10 +25,6 @@ var printGenericEvent = function(events) {
     + events[i].actor.avatar_url
     + ">"
     + "</a>"
-    + "<div class='col s8'>"
-    + timeSince(new Date(Date.parse(events[i].created_at)))
-    + " ago"
-    + "</div>"
     + "</div>"
     + "</p>"
     + "<h5>"
@@ -36,7 +36,7 @@ var printGenericEvent = function(events) {
     + " - "
     + naturalLanguageEventInfo(events[i])
     + "</h5>"
-    + "<div class='col s9 offest-s3 v-align'>"
+    + "<div class='col s9 offest-s3 v-align undo-padding'>"
     + "<p>"
     +  "Repository: "
     + "<a class='repo-link' href='http://github.com/"
@@ -85,26 +85,26 @@ var naturalLanguageEventInfo = function(eventType) {
     }
 
     else if (eventType.type === "PullRequestEvent") {
-      return "submited a pull request for: " + eventType.payload.pull_request.title + " to the repository " + eventType.repo.full_name
+      return "submited a pull request for: " + eventType.payload.pull_request.title + " to the repository " + eventType.repo.full_name.split("/")[1]
     }
 
     else if (eventType.type === "IssuesEvent") {
-      return eventType.payload.action + " an issue for the repository " + eventType.repo.name
+      return eventType.payload.action + " an issue for the repository " + eventType.repo.name.split("/")[1]
     }
 
     else if (eventType.type === "IssueCommentEvent") {
-      return "commented on the issue: " + eventType.payload.issue.title + " for the repository " + eventType.repo.name
+      return "commented on the issue: " + eventType.payload.issue.title + " for the repository " + eventType.repo.name.split("/")[1]
     }
 
     else if (eventType.type === "ForkEvent") {
-      return "forked the repository: " + eventType.repo.name
+      return "forked the repository: " + eventType.repo.name.split("/")[1]
     }
 
     else if (eventType.type === "WatchEvent") {
-      return eventType.payload.action + " watching " + eventType.repo.name
+      return eventType.payload.action + " watching " + eventType.repo.name.split("/")[1]
     }
 
     else if (eventType.type === "MemberEvent") {
-      return "added " + "<a href='http://github.com/" + eventType.payload.member.login + "'>" + eventType.payload.member.login + "</a>" + " as a member of the " + eventType.repo.name + " repository"
+      return "added " + "<a href='http://github.com/" + eventType.payload.member.login + "'>" + eventType.payload.member.login + "</a>" + " as a member of the " + eventType.repo.name.split("/")[1] + " repository"
     }
   };
