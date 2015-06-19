@@ -53,7 +53,9 @@ var printGenericEvent = function(events) {
     + events[i].repo.name
     + "<i class='mdi-navigation-close right'></i>"
     + "</span>"
-    + "<table class='hoverable'>"
+    + "<table class='"
+    + events[i].repo.name
+    + " hoverable'>"
     + "<thead>"
     + "<tr>"
     + "<th data-field='name'>Commiter's Name</th>"
@@ -61,7 +63,9 @@ var printGenericEvent = function(events) {
     + "<th data-field='pertage commits'>Percent Total Contribution</th>"
     + "</tr>"
     + "</thead>"
-    + "<tbody class='commit-table'>"
+    + "<tbody class='"
+    + events[i].repo.name.split("/")[1]
+    + "'>"
     + "</tbody>"
     + "</table>"
     + "</div>"
@@ -85,7 +89,7 @@ var naturalLanguageEventInfo = function(eventType) {
     }
 
     else if (eventType.type === "PullRequestEvent") {
-      return "submited a pull request for: " + eventType.payload.pull_request.title + " to the repository " + eventType.repo.full_name.split("/")[1]
+      return "submited a pull request for: " + eventType.payload.pull_request.title + " to the repository " + eventType.repo.full_name
     }
 
     else if (eventType.type === "IssuesEvent") {
