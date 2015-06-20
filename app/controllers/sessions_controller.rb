@@ -14,6 +14,12 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session.clear
+    flash[:danger] = "Big Gulps huh? Welp - cya later"
+    redirect_to login_path
+  end
+
   private
 
   def auth

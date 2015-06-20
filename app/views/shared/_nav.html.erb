@@ -5,13 +5,17 @@
 
 
         <ul class="right hide-on-med-and-down">
-          <li> <div class="input-field ">
-                <label for="search-bar">Search</label><input id="search-bar" type="text" class="validate">
-               </div>
+          <li class="col s6">
+            <div class="input-field">
+              <input id="search-bar" type="text" class="validate">
+              <label for="search-bar">Search</label>
+            </div>
           </li>
           <li><%= link_to "Feed", "#" %></li>
           <li><%= link_to "Explore", "#" %></li>
-          <li><%= link_to "SomethingElse", "#" %></li>
+          <% if logged_in? %>
+          <li><%= link_to "Log Out", logout_path %></li>
+          <% end %>
         </ul>
       </div>
     </nav>
