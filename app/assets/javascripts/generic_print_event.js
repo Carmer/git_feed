@@ -71,6 +71,7 @@ var printGenericEvent = function(events) {
     + "</div>"
     + "</li>").appendTo(".event-feed-list");
   }
+  eventList = []
 };
 
 
