@@ -1,7 +1,13 @@
 $(function() {
+  pageLoader();
+});
+
+
+
+var pageLoader = function() {
   var token = $("#user-page").data("userToken")
   $.ajax({
-    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=1&per_page=100?access_token=" + token,
+    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=" + pageNumber + "&per_page=100?access_token=" + token,
     dataType: "json",
     success: function(success) {
       collectEvents(success)
@@ -11,7 +17,7 @@ $(function() {
       }
   });
   $.ajax({
-    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/events?page=1&per_page=100?access_token=" + token,
+    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/events?page=" + pageNumber+ "&per_page=100?access_token=" + token,
     success: function(success) {
       collectEvents(success)
     },
@@ -24,8 +30,10 @@ $(function() {
     populateCommitHistory();
     filterEvents();
     searchEvents();
+    scroller();
   });
-});
+}
+
 
 var eventList = []
 
