@@ -6,6 +6,7 @@ $(function() {
 
 var pageLoader = function() {
   var token = $("#user-page").data("userToken")
+  $(".windows8").toggleClass("hidden")
   $.ajax({
     url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=" + pageNumber + "&per_page=100?access_token=" + token,
     dataType: "json",
@@ -26,6 +27,7 @@ var pageLoader = function() {
     }
   })
   .done( function() {
+    $(".windows8").toggleClass("hidden")
     printGenericEvent(eventList);
     populateCommitHistory();
     filterEvents();
