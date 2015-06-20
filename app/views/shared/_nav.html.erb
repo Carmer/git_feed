@@ -1,8 +1,14 @@
 <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper black">
-        <%= link_to "Git_Feed", "#", class: "brand-logo" %>
+        <%= link_to "Git_Feed", "#", id: "brand-logo" %>
+
+
         <ul class="right hide-on-med-and-down">
+          <li> <div class="input-field ">
+                <label for="search-bar">Search</label><input id="search-bar" type="text" class="validate">
+               </div>
+          </li>
           <li><%= link_to "Feed", "#" %></li>
           <li><%= link_to "Explore", "#" %></li>
           <li><%= link_to "SomethingElse", "#" %></li>

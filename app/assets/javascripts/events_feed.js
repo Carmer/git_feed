@@ -23,6 +23,7 @@ $(function() {
     printGenericEvent(eventList);
     populateCommitHistory();
     filterEvents();
+    searchEvents();
   });
 });
 
