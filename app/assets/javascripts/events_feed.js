@@ -2,8 +2,6 @@ $(function() {
   pageLoader();
 });
 
-
-
 var pageLoader = function() {
   var token = $("#user-page").data("userToken")
   $(".windows8").toggleClass("hidden")
@@ -14,7 +12,7 @@ var pageLoader = function() {
       collectEvents(success);
     },
     error: function(error) {
-      console.log(error) //this needs to change. Just a placeholer currently
+      alert("Page Could Not Load")
       }
   });
   $.ajax({
@@ -23,7 +21,7 @@ var pageLoader = function() {
       collectEvents(success)
     },
     error: function(error) {
-      console.log(error) //this needs to change. Just a placeholer currently
+      alert("Page Could Not Load")
     }
   })
   .done( function() {
@@ -32,31 +30,9 @@ var pageLoader = function() {
     printGenericEvent(eventList);
     populateCommitHistory();
     filterEvents();
-    searchEvents();
-    scroller();
-    publicFeed();
   });
 }
 
-
-
-
-var eventList = []
-
-var collectEvents = function(eventsInfo) {
-  for (i = 0; i < eventsInfo.length; i ++) {
-    eventList.push(eventsInfo[i]);
-  }
-};
-
-
-////Not sure if ssort works correctly yet
-
-var sortEvents = function() {
-  eventList.sort(function(x,y){
-    return x - y;
-  });
-}
 
 var publicFeed = function() {
   $("#public-feed").on("click", function(){
@@ -71,17 +47,37 @@ var publicFeed = function() {
         collectEvents(success)
       },
       error: function(error) {
-        console.log(error) //this needs to change. Just a placeholer currently
+        alert("Page Could Not Load")
         }
     })
   .done( function() {
     console.log("win")
     $(".windows8").toggleClass("hidden")
-    printGenericEvent(eventList);
-    populateCommitHistory();
     filterEvents();
-    searchEvents();
-    scroller();
+    printGenericEvent(eventList);
   });
 })
+}
+
+
+var eventList = []
+
+var collectEvents = function(eventsInfo) {
+  for (i = 0; i < eventsInfo.length; i ++) {
+    eventList.push(eventsInfo[i]);
+  }
+  searchEvents();
+  scroller();
+  filterEvents();
+  populateCommitHistory();
+  publicFeed();
+};
+
+
+////Not sure if ssort works correctly yet
+
+var sortEvents = function() {
+  eventList.sort(function(x,y){
+    return x - y;
+  });
 }
