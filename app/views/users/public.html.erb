@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <h2 class="center-align" id="user-page" data-user-login="<%= @user.login %>" data-user-token="<%= @user.token %>"><%= @user.login %>'s Git_Feed</h2>
+      <ul class="event-feed-list">
+        <li>
+          <div class="card">
+            <div class="col s6 offset-s3">
+              <h6>time here</h6>
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4 event-title"> <i class="mdi-navigation-more-vert right"></i></span>
+                  <div class="waves-effect waves-block waves-light col s3">
+                    <p><a href="####needstobeurlforeventagent"><%= image_tag  "#{@user.avatar_url}", class: "circle img-avatar"%></a></p>
+                  </div>
+
+                  <div class="col s6 offest-s3">
+                    <p><h5 class="event-user-login">Hello there</h5><a href="#">This is a link</a></p>
+
+                    <p>
+                      All feeds for all events. Go find things and you'll see. Continue below to read. Go find things and you'll see. Continue below to read. Ipsum. Ipsum Ipsum.
+                    </p>
+                  </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i class="mdi-navigation-close right"></i></span>
+                <p>Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.Ill be adding information here. im not quite sure what yet, but maybe options or just more information.</p>
+              </div>
+            </div>
+          </li>
+        </div>
+      </ul>
+  </div>
+</div>
+
+<div class="windows8 hidden spinner center-align">
+  <div class="wBall" id="wBall_1">
+    <div class="wInnerBall">
+    </div>
+  </div>
+  <div class="wBall" id="wBall_2">
+    <div class="wInnerBall">
+    </div>
+  </div>
+    <div class="wBall" id="wBall_3">
+      <div class="wInnerBall">
+      </div>
+    </div>
+    <div class="wBall" id="wBall_4">
+      <div class="wInnerBall">
+      </div>
+    </div>
+    <div class="wBall" id="wBall_5">
+      <div class="wInnerBall">
+    </div>
+  </div>
+</div>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+<form action="#">
+  <label>Filter by event type:</label>
+  <p>
+    <input type="checkbox" class="filled-in filter-button CreateEvent" id="filter_check_1" checked="checked" data-event-type="CreateEvent"/>
+    <label for="filter_check_1">Create</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button DeleteEvent" id="filter_check_2" checked="checked" data-event-type="DeleteEvent"/>
+    <label for="filter_check_2">Delete</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button ForkEvent" id="filter_check_3" checked="checked" data-event-type="ForkEvent"/>
+    <label for="filter_check_3">Fork</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button IssuesEvent" id="filter_check_4" checked="checked" data-event-type="IssuesEvent"/>
+    <label for="filter_check_4">Issues</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button IssueCommentEvent" id="filter_check_5" checked="checked" data-event-type="IssueCommentEvent"/>
+    <label for="filter_check_5">Issue Comment</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button MemberEvent" id="filter_check_6" checked="checked" data-event-type="MemberEvent"/>
+    <label for="filter_check_6">Member</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button PushEvent" id="filter_check_7" checked="checked" data-event-type="PushEvent"/>
+    <label for="filter_check_7">Push</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button PullRequestEvent" id="filter_check_8" checked="checked" data-event-type="PullRequestEvent"/>
+    <label for="filter_check_8">Pull</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in WatchEvent filter-button" id="filter_check_9" checked="checked" data-event-type="WatchEvent"/>
+    <label for="filter_check_9">Watch</label>
+  </p>
+</form>
+  </div>

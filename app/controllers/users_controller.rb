@@ -8,4 +8,7 @@ class UsersController < ApplicationController
     @events = %w( MemberEvent CreateEvent DeleteEvent PushEvent PullRequestEvent IssueEvent IssueCommentEvent ForkEvent WatchEvent)
     @user = current_user
   end
+
+  def public
+  end
 end

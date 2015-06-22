@@ -3,6 +3,7 @@ $(function() {
 });
 
 var pageLoader = function() {
+  $(".event-feed-list").attr("id", "community-feed-list")
   var token = $("#user-page").data("userToken")
   $(".windows8").toggleClass("hidden")
   $.ajax({
@@ -14,22 +15,12 @@ var pageLoader = function() {
     error: function(error) {
       alert("Page Could Not Load")
       }
-  });
-  $.ajax({
-    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/events?page=" + pageNumber+ "&per_page=100&access_token=" + token,
-    success: function(success) {
-      collectEvents(success)
-    },
-    error: function(error) {
-      alert("Page Could Not Load")
-    }
   })
   .done( function() {
     sortEvents();
     $(".windows8").toggleClass("hidden")
     printGenericEvent(eventList);
     populateCommitHistory();
-    filterEvents();
   });
 }
 
@@ -37,6 +28,7 @@ var pageLoader = function() {
 var publicFeed = function() {
   $("#public-feed").on("click", function(){
     $(".event-feed-list").empty();
+    $(".event-feed-list").attr("id", "public-feed-list")
     var token = $("#user-page").data("userToken")
     $(".windows8").toggleClass("hidden")
     eventList = []
@@ -51,9 +43,7 @@ var publicFeed = function() {
         }
     })
   .done( function() {
-    console.log("win")
     $(".windows8").toggleClass("hidden")
-    filterEvents();
     printGenericEvent(eventList);
   });
 })
