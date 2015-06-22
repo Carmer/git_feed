@@ -33,6 +33,7 @@ var pageLoader = function() {
     filterEvents();
     searchEvents();
     scroller();
+    publicFeed();
   });
 }
 
@@ -48,11 +49,13 @@ var collectEvents = function(eventsInfo) {
 };
 
 var publicFeed = function() {
-  $(".public-feed").on("click", function(){
+  $("#public-feed").on("click", function(){
+    $(".event-feed-list").empty();
+    var token = $("#user-page").data("userToken")
     $(".windows8").toggleClass("hidden")
     eventList = []
     $.ajax({
-      url: "http://api.github.com/events/?page=" + pageNumber + "&per_page=100&access_token=" + token,
+      url: "http://api.github.com/events?page=" + pageNumber + "&per_page=100&access_token=" + token,
       dataType: "json",
       success: function(success) {
         collectEvents(success)
@@ -61,8 +64,8 @@ var publicFeed = function() {
         console.log(error) //this needs to change. Just a placeholer currently
         }
     })
-  })
   .done( function() {
+    console.log("win")
     $(".windows8").toggleClass("hidden")
     printGenericEvent(eventList);
     populateCommitHistory();
@@ -70,4 +73,5 @@ var publicFeed = function() {
     searchEvents();
     scroller();
   });
+})
 }
