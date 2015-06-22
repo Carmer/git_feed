@@ -6,11 +6,4 @@ var filterEvents = function() {
 
   })
 
-  $(".filter-button")
-  .mouseenter(function() {
-    $("#" + $(this).data("eventType")).html($(this).data("eventType"))  ;
-  })
-  .mouseleave(function() {
-    $("#" + $(this).data("eventType")).parent().remove(($(this).data("eventType")));
-  })
 }

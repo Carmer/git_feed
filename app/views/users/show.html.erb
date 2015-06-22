@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h2 class="center-align" id="user-page" data-user-login="<%= @user.login %>"><%= @user.login %>'s Git_Feed</h2>
+    <h2 class="center-align" id="user-page" data-user-login="<%= @user.login %>" data-user-token="<%= @user.token %>"><%= @user.login %>'s Git_Feed</h2>
       <ul class="event-feed-list">
         <li>
           <div class="card">
@@ -31,19 +31,67 @@
   </div>
 </div>
 
+<div class="windows8 hidden spinner center-align">
+  <div class="wBall" id="wBall_1">
+    <div class="wInnerBall">
+    </div>
+  </div>
+  <div class="wBall" id="wBall_2">
+    <div class="wInnerBall">
+    </div>
+  </div>
+    <div class="wBall" id="wBall_3">
+      <div class="wInnerBall">
+      </div>
+    </div>
+    <div class="wBall" id="wBall_4">
+      <div class="wInnerBall">
+      </div>
+    </div>
+    <div class="wBall" id="wBall_5">
+      <div class="wInnerBall">
+    </div>
+  </div>
+</div>
+
 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large black">
-      <i class="large mdi-content-filter-list black"></i>
-    </a>
-    <ul>
-      <li><a class="btn-floating grey filter-button" id="MemberEvent" data-event-type="MemberEvent"><i class="large mdi-content-block"></i></a></li>
-      <li><a class="btn-floating grey filter-button" id="CreateEvent" data-event-type="CreateEvent"><i class="large mdi-content-block"></i></a></li>
-      <li><a class="btn-floating grey filter-button" id="DeleteEvent" data-event-type="DeleteEvent"><i class="large mdi-content-block"></i></a></li>
-      <li><a class="btn-floating grey filter-button" id="PushEvent" data-event-type="PushEvent"><i class="large mdi-content-block"></i></a></li>
-      <li><a class="btn-floating grey filter-button" id="PullRequestEvent" data-event-type="PullRequestEvent"><i class="large mdi-content-block"></i></a></li>
-      <li><a class="btn-floating grey filter-button" id="IssuesEvent" data-event-type="IssuesEvent"><i class="large mdi-content-block"></i></a></li>
-      <li><a class="btn-floating grey filter-button" id="IssueCommentEvent" data-event-type="IssueCommentEvent"><i class="large mdi-content-block"></i></a></li>
-      <li><a class="btn-floating grey filter-button" id="ForkEvent" data-event-type="ForkEvent"><i class="large mdi-content-block"></i></a></li>
-      <li><a class="btn-floating grey filter-button" id="WatchEvent" data-event-type="WatchEvent"><i class="large mdi-content-block"></i></a></li>
-    </ul>
+<form action="#">
+  <label>Filter by event type:</label>
+  <p>
+    <input type="checkbox" class="filled-in filter-button CreateEvent" id="filter_check_1" checked="checked" data-event-type="CreateEvent"/>
+    <label for="filter_check_1">Create</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button DeleteEvent" id="filter_check_2" checked="checked" data-event-type="DeleteEvent"/>
+    <label for="filter_check_2">Delete</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button ForkEvent" id="filter_check_3" checked="checked" data-event-type="ForkEvent"/>
+    <label for="filter_check_3">Fork</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button IssuesEvent" id="filter_check_4" checked="checked" data-event-type="IssuesEvent"/>
+    <label for="filter_check_4">Issues</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button IssueCommentEvent" id="filter_check_5" checked="checked" data-event-type="IssueCommentEvent"/>
+    <label for="filter_check_5">Issue Comment</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button MemberEvent" id="filter_check_6" checked="checked" data-event-type="MemberEvent"/>
+    <label for="filter_check_6">Member</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button PushEvent" id="filter_check_7" checked="checked" data-event-type="PushEvent"/>
+    <label for="filter_check_7">Push</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in filter-button PullRequestEvent" id="filter_check_8" checked="checked" data-event-type="PullRequestEvent"/>
+    <label for="filter_check_8">Pull</label>
+  </p>
+  <p>
+    <input type="checkbox" class="filled-in WatchEvent filter-button" id="filter_check_9" checked="checked" data-event-type="WatchEvent"/>
+    <label for="filter_check_9">Watch</label>
+  </p>
+</form>
   </div>
