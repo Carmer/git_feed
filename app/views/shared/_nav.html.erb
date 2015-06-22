@@ -11,8 +11,8 @@
               <label for="search-bar">Search</label>
             </div>
           </li>
-          <li><%= link_to "Feed", "#" %></li>
-          <li><%= link_to "Explore", "#" %></li>
+          <li><%= link_to "Public Feed", "#", id: "public-feed" %></li>
+          <li><%= link_to "Explore", "#", id: "explore" %></li>
           <% if logged_in? %>
           <li><%= link_to "Log Out", logout_path %></li>
           <% end %>

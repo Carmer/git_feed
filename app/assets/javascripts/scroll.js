@@ -1,6 +1,6 @@
 var scroller = function() {
   $(window).on("scroll", function() {
-    if ($(window).scrollTop() > $(document).height() - $(window).height() - 60){
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 100){
       pageNumber ++;
       pageLoader();
     };

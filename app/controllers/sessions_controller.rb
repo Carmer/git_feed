@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    
     user = User.find_or_create_by_auth(auth)
     if user.save
       flash[:success] = "Log In Successful"
