@@ -11,7 +11,7 @@ var pageLoader = function() {
     url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=" + pageNumber + "&per_page=100&access_token=" + token,
     dataType: "json",
     success: function(success) {
-      collectEvents(success)
+      collectEvents(success);
     },
     error: function(error) {
       console.log(error) //this needs to change. Just a placeholer currently
@@ -27,6 +27,7 @@ var pageLoader = function() {
     }
   })
   .done( function() {
+    sortEvents();
     $(".windows8").toggleClass("hidden")
     printGenericEvent(eventList);
     populateCommitHistory();
@@ -44,9 +45,18 @@ var eventList = []
 
 var collectEvents = function(eventsInfo) {
   for (i = 0; i < eventsInfo.length; i ++) {
-    eventList.push(eventsInfo[i])
+    eventList.push(eventsInfo[i]);
   }
 };
+
+
+////Not sure if ssort works correctly yet
+
+var sortEvents = function() {
+  eventList.sort(function(x,y){
+    return x - y;
+  });
+}
 
 var publicFeed = function() {
   $("#public-feed").on("click", function(){
