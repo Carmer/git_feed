@@ -76,6 +76,7 @@ var exploreFeed = function() {
   $("#explore-button").on("click", function(){
   $(".event-feed-list").empty();
     exploreFeedCall();
+    filterEvents();
   })
 }
 
