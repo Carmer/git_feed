@@ -24,9 +24,9 @@ var communityFeed = function() {
     url: "http://api.github.com/users/" + $("#community-page").data("userLogin") + "/received_events?page=" + pageNumber + "&per_page=100&access_token=" + token,
     dataType: "json",
     success: function(success) {
+      collectEvents(success);
       $(".load-more-button").toggleClass("hidden")
       $(".windows8").toggleClass("hidden")
-      collectEvents(success);
     },
     error: function(error) {
       $(".load-more-button").toggleClass("hidden")
@@ -53,9 +53,9 @@ var publicFeed = function() {
       url: "http://api.github.com/events?page=" + pageNumber + "&per_page=100&access_token=" + token,
       dataType: "json",
       success: function(success) {
+        collectEvents(success)
         $(".load-more-button").toggleClass("hidden")
         $(".windows8").toggleClass("hidden")
-        collectEvents(success)
       },
         error: function(error) {
         $(".load-more-button").toggleClass("hidden")
@@ -90,9 +90,9 @@ var exploreFeedCall = function()  {
     url: "http://api.github.com/users/" + username + "/events?page=" + pageNumber + "&per_page=100&access_token=" + token,
     dataType: "json",
     success: function(success) {
+      collectEvents(success);
       $(".windows8").toggleClass("hidden")
       $(".load-more-button").toggleClass("hidden")
-      collectEvents(success);
     },
     error: function(error) {
         $(".load-more-button").toggleClass("hidden")

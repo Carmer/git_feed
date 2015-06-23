@@ -7,7 +7,7 @@ var printGenericEvent = function(events) {
     + events[i].type
     + ">"
     + "<div class='card'>"
-    + "<div class='col s6 offset-s3'>"
+    + "<div class='col s6 offset-s3 time'>"
     + timeSince(new Date(Date.parse(events[i].created_at)))
     + " ago"
     + "</div>"
