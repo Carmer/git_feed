@@ -1,7 +1,7 @@
 var populateCommitHistory = function(){
   $(".repo-data-name").on("click", function(){
     var repo = $(this).data("repoName")
-    var token = $("#user-page").data("userToken")
+    tokenFinder();
     $.ajax({
       url: "https://api.github.com/repos/" + repo + "/commits?access_token=" + token,
       dataType: "json",
@@ -13,6 +13,20 @@ var populateCommitHistory = function(){
     })
   })
 };
+
+var token = 0
+
+var tokenFinder = function(){
+  if ($("#public-page").html() === "Public Git_Feed") {
+    token = $("#public-page").data("userToken")
+  }
+  else if ($("#explore-page").html() === "Explore Git_Feed") {
+    token = $("#explore-page").data("userToken")
+  }
+  else {
+    token = $("#community-page").data("userToken")
+  }
+}
 
 var countCommits = function(commitData) {
   var commitCount = {}

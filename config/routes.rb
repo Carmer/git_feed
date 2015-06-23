@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/public-feed", to: 'users#public'
+  get "/public-feed", to: 'users#public', as: :public
+  get "/explore", to: 'users#explore', as: :explore
 
   require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'

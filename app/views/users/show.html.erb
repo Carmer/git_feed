@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h2 class="center-align" id="user-page" data-user-login="<%= @user.login %>" data-user-token="<%= @user.token %>"><%= @user.login %>'s Git_Feed</h2>
+    <h2 class="center-align" id="community-page" data-user-login="<%= @user.login %>" data-user-token="<%= @user.token %>"><%= @user.login %>'s Git_Feed</h2>
       <ul class="event-feed-list">
         <li>
           <div class="card">
@@ -95,3 +95,9 @@
   </p>
 </form>
   </div>
+
+<div class="container">
+  <div class="col s12 center-align load-more-button hidden">
+  <button class="load-more-button btn btn-large">Load More Events</button>
+  </div>
+</div>

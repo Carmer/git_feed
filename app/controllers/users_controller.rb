@@ -5,10 +5,14 @@ class UsersController < ApplicationController
   respond_to :json, :html
 
   def show
-    @events = %w( MemberEvent CreateEvent DeleteEvent PushEvent PullRequestEvent IssueEvent IssueCommentEvent ForkEvent WatchEvent)
     @user = current_user
   end
 
   def public
+    @user = current_user
+  end
+
+  def explore
+    @user = current_user
   end
 end
