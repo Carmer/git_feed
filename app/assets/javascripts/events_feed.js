@@ -66,6 +66,7 @@ var publicFeed = function() {
     sortEvents();
     printGenericEvent(eventList);
     filterEvents();
+    populateCommitHistory();
   });
 // })
 }
