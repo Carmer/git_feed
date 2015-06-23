@@ -16925,39 +16925,145 @@ Picker.extend( 'pickadate', DatePicker )
 
 
 $(function() {
+  loader();
+  scroller();
+});
+
+var loader = function() {
+  filterEvents();
+  if ($("#public-page").html() === "Public Git_Feed") {
+    publicFeed();
+  }
+  else if ($("#explore-page").html() === "Explore Git_Feed") {
+    exploreFeed();
+  }
+  else {
+    communityFeed();
+  }
+}
+
+var communityFeed = function() {
+  var token = $("#community-page").data("userToken")
+  $(".windows8").toggleClass("hidden")
+  $(".event-feed-list").attr("id", "community-feed-list")
   $.ajax({
-    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/received_events?page=1&per_page=100",
+    url: "http://api.github.com/users/" + $("#community-page").data("userLogin") + "/received_events?page=" + pageNumber + "&per_page=100&access_token=" + token,
     dataType: "json",
     success: function(success) {
-      collectEvents(success)
+      $(".load-more-button").toggleClass("hidden")
+      $(".windows8").toggleClass("hidden")
+      collectEvents(success);
     },
     error: function(error) {
-      console.log(error) //this needs to change. Just a placeholer currently
+      $(".load-more-button").toggleClass("hidden")
+      $(".windows8").toggleClass("hidden")
       }
+  })
+  .done( function() {
+    sortEvents();
+    printGenericEvent(eventList);
+    populateCommitHistory();
+    filterEvents();
   });
+}
+
+
+var publicFeed = function() {
+  // $("#public-feed").on("click", function(){
+    // $(".event-feed-list").empty();
+    $(".windows8").toggleClass("hidden")
+    var token = $("#public-page").data("userToken")
+    $(".event-feed-list").attr("id", "public-feed-list")
+    eventList = []
+    $.ajax({
+      url: "http://api.github.com/events?page=" + pageNumber + "&per_page=100&access_token=" + token,
+      dataType: "json",
+      success: function(success) {
+        $(".load-more-button").toggleClass("hidden")
+        $(".windows8").toggleClass("hidden")
+        collectEvents(success)
+      },
+        error: function(error) {
+        $(".load-more-button").toggleClass("hidden")
+        $(".windows8").toggleClass("hidden")
+        }
+    })
+  .done( function() {
+    sortEvents();
+    printGenericEvent(eventList);
+    filterEvents();
+  });
+// })
+}
+
+
+var exploreFeed = function() {
+  $(".event-feed-list").attr("id", "explore-feed-list")
+  $("#explore-button").on("click", function(){
+  $(".event-feed-list").empty();
+    exploreFeedCall();
+  })
+}
+
+var exploreFeedCall = function()  {
+  $(".windows8").toggleClass("hidden")
+  $(".event-feed-list").attr("id", "explore-feed-list")
+  var token = $("#explore-page").data("userToken")
+  var username = $("#explore-username").val();
   $.ajax({
-    url: "http://api.github.com/users/" + $("#user-page").data("userLogin") + "/events?page=1&per_page=100",
+    url: "http://api.github.com/users/" + username + "/events?page=" + pageNumber + "&per_page=100&access_token=" + token,
+    dataType: "json",
     success: function(success) {
-      collectEvents(success)
+      $(".windows8").toggleClass("hidden")
+      $(".load-more-button").toggleClass("hidden")
+      collectEvents(success);
     },
     error: function(error) {
-      console.log(error) //this needs to change. Just a placeholer currently
-    }
+        $(".load-more-button").toggleClass("hidden")
+      $(".windows8").toggleClass("hidden")
+      }
+  })
+  $.ajax({
+    url: "http://api.github.com/users/" + username + "/received_events?page=" + pageNumber + "&per_page=100&access_token=" + token,
+    dataType: "json",
+    success: function(success) {
+      collectEvents(success);
+    },
+    error: function(error) {
+      $(".windows8").toggleClass("hidden")
+      }
   })
   .done( function() {
     printGenericEvent(eventList);
     populateCommitHistory();
     filterEvents();
+    sortEvents();
   });
-});
+}
+
+
 
 var eventList = []
 
 var collectEvents = function(eventsInfo) {
   for (i = 0; i < eventsInfo.length; i ++) {
-    eventList.push(eventsInfo[i])
+    eventList.push(eventsInfo[i]);
   }
+  searchEvents();
+  scroller();
+  filterEvents();
+  populateCommitHistory();
 };
+
+
+////Not sure if ssort works correctly yet
+
+var sortEvents = function() {
+  eventList.sort(function(x,y){
+    return x - y;
+  });
+}
+;
 var filterEvents = function() {
   $(".filter-button").on("click", function() {
     var filteredEvent = $(this).data("eventType")
@@ -16966,13 +17072,6 @@ var filterEvents = function() {
 
   })
 
-  $(".filter-button")
-  .mouseenter(function() {
-    $("#" + $(this).data("eventType")).html($(this).data("eventType"))  ;
-  })
-  .mouseleave(function() {
-    $("#" + $(this).data("eventType")).parent().remove(($(this).data("eventType")));
-  })
 }
 ;
 
@@ -16984,6 +17083,10 @@ var printGenericEvent = function(events) {
     + events[i].type
     + ">"
     + "<div class='card'>"
+    + "<div class='col s6 offset-s3'>"
+    + timeSince(new Date(Date.parse(events[i].created_at)))
+    + " ago"
+    + "</div>"
     + "<div class='card-content'>"
     + "<span class='card-title activator grey-text text-darken-4 event-title'>"
     + "<i class='mdi-navigation-more-vert right repo-data-name' data-repo-name='"
@@ -16998,10 +17101,6 @@ var printGenericEvent = function(events) {
     + events[i].actor.avatar_url
     + ">"
     + "</a>"
-    + "<div class='col s8'>"
-    + timeSince(new Date(Date.parse(events[i].created_at)))
-    + " ago"
-    + "</div>"
     + "</div>"
     + "</p>"
     + "<h5>"
@@ -17013,7 +17112,7 @@ var printGenericEvent = function(events) {
     + " - "
     + naturalLanguageEventInfo(events[i])
     + "</h5>"
-    + "<div class='col s9 offest-s3 v-align'>"
+    + "<div class='col s9 offest-s3 v-align undo-padding'>"
     + "<p>"
     +  "Repository: "
     + "<a class='repo-link' href='http://github.com/"
@@ -17030,7 +17129,9 @@ var printGenericEvent = function(events) {
     + events[i].repo.name
     + "<i class='mdi-navigation-close right'></i>"
     + "</span>"
-    + "<table class='hoverable'>"
+    + "<table class='"
+    + events[i].repo.name
+    + " hoverable'>"
     + "<thead>"
     + "<tr>"
     + "<th data-field='name'>Commiter's Name</th>"
@@ -17038,12 +17139,15 @@ var printGenericEvent = function(events) {
     + "<th data-field='pertage commits'>Percent Total Contribution</th>"
     + "</tr>"
     + "</thead>"
-    + "<tbody class='commit-table'>"
+    + "<tbody class='"
+    + events[i].repo.name.split("/")[1]
+    + "'>"
     + "</tbody>"
     + "</table>"
     + "</div>"
     + "</li>").appendTo(".event-feed-list");
   }
+  eventList = []
 };
 
 
@@ -17066,47 +17170,60 @@ var naturalLanguageEventInfo = function(eventType) {
     }
 
     else if (eventType.type === "IssuesEvent") {
-      return eventType.payload.action + " an issue for the repository " + eventType.repo.name
+      return eventType.payload.action + " an issue for the repository " + eventType.repo.name.split("/")[1]
     }
 
     else if (eventType.type === "IssueCommentEvent") {
-      return "commented on the issue: " + eventType.payload.issue.title + " for the repository " + eventType.repo.name
+      return "commented on the issue: " + eventType.payload.issue.title + " for the repository " + eventType.repo.name.split("/")[1]
     }
 
     else if (eventType.type === "ForkEvent") {
-      return "forked the repository: " + eventType.repo.name
+      return "forked the repository: " + eventType.repo.name.split("/")[1]
     }
 
     else if (eventType.type === "WatchEvent") {
-      return eventType.payload.action + " watching " + eventType.repo.name
+      return eventType.payload.action + " watching " + eventType.repo.name.split("/")[1]
     }
 
     else if (eventType.type === "MemberEvent") {
-      return "added " + "<a href='http://github.com/" + eventType.payload.member.login + "'>" + eventType.payload.member.login + "</a>" + " as a member of the " + eventType.repo.name + " repository"
+      return "added " + "<a href='http://github.com/" + eventType.payload.member.login + "'>" + eventType.payload.member.login + "</a>" + " as a member of the " + eventType.repo.name.split("/")[1] + " repository"
     }
   };
 var populateCommitHistory = function(){
   $(".repo-data-name").on("click", function(){
+    var repo = $(this).data("repoName")
+    tokenFinder();
     $.ajax({
-      url: "https://api.github.com/repos/" + $(this).data("repoName") + "/commits",
+      url: "https://api.github.com/repos/" + repo + "/commits?access_token=" + token,
       dataType: "json",
-      success: function(data) {
-        countCommits(data)
+      success: function(xhr) {
       },
 
-    }).done( function(data) {
-      appendCommits(countCommits(data))
+    }).done( function(xhr) {
+      appendCommits( countCommits(xhr), repo )
     })
   })
 };
 
-var countCommits = function(commitData) {
+var token = 0
 
+var tokenFinder = function(){
+  if ($("#public-page").html() === "Public Git_Feed") {
+    token = $("#public-page").data("userToken")
+  }
+  else if ($("#explore-page").html() === "Explore Git_Feed") {
+    token = $("#explore-page").data("userToken")
+  }
+  else {
+    token = $("#community-page").data("userToken")
+  }
+}
+
+var countCommits = function(commitData) {
   var commitCount = {}
 
-  for ( i = 0 ; i < commitData.length ; i ++ ) {
-
-  commitCount[commitData[i].commit.committer.name] = 1 + (commitCount[commitData[i].commit.committer.name] || 0)
+  for ( x = 0 ; x < commitData.length ; x ++ ) {
+  commitCount[commitData[x].commit.committer.name] = 1 + (commitCount[commitData[x].commit.committer.name] || 0)
   }
   return commitCount
 };
@@ -17115,17 +17232,71 @@ var sumCommits = function(commitData) {
 
   var totalCommits = 0
 
-  for (i = 0 ; i < Object.keys(commitData).length ; i ++ ) {
-    totalCommits += commitData[Object.keys(commitData)[i]]
+  for (ii = 0 ; ii < Object.keys(commitData).length ; ii ++ ) {
+    totalCommits += commitData[Object.keys(commitData)[ii]]
   }
   return totalCommits
+
+  totalCommits = 0
 };
 
-var appendCommits = function(commitCount) {
-  for (i = 0 ; i < Object.keys(commitCount).length ; i ++ ) {
-  $("<tr><td>" + Object.keys(commitCount)[i] + "</td><td>" + commitCount[Object.keys(commitCount)[i]] + "</td><td>" + ( ( commitCount[Object.keys(commitCount)[i]] / sumCommits(commitCount)) * 100) + "</td><tr>" ).appendTo("tbody")
-  }
+var appendCommits = function(commitCount, repoName) {
+  var commitInfo = [];
+
+  var table = "table ." + repoName.split("/")[1]
+
+  $(table).html("")
+
+  for (i = 0 ; i < (Object.keys(commitCount).length) ; i ++ ) {
+    $("<tr><td>" + Object.keys(commitCount)[i] + "</td><td>" + commitCount[Object.keys(commitCount)[i]] + "</td><td>" + ( ( commitCount[Object.keys(commitCount)[i]] / sumCommits(commitCount)) * 100) + "</td><tr>" ).appendTo( table );
+  };
 };
+var scroller = function() {
+    pageNumber = 1
+    // Removed window scroll load becasue of issues with multiple calls on scroll
+    // $(window).on("scroll", function() {
+  $(".load-more-button").on("click", function() {
+    // if ($(window).scrollTop() > $(document).height() - $(window).height() - 100 && $(".event-feed-list").attr("id") === "public-feed-list") {
+    if ($(".event-feed-list").attr("id") === "public-feed-list") {
+      pageNumber += 1
+      publicFeed();
+    }
+
+    // else if ($(window).scrollTop() > $(document).height() - $(window).height() - 100 && $(".event-feed-list").attr("id") === "community-feed-list") {
+    else if ($(".event-feed-list").attr("id") === "community-feed-list") {
+      pageNumber += 1
+      communityFeed();
+    }
+
+    // else if ($(window).scrollTop() > $(document).height() - $(window).height() - 100 && $(".event-feed-list").attr("id") === "explore-feed-list") {
+    else if ($(".event-feed-list").attr("id") === "explore-feed-list") {
+      pageNumber += 1
+      exploreFeedCall();
+    }
+  });
+}
+
+
+
+var pageNumber = 1
+;
+var searchEvents = function() {
+  $("#search-bar").on("keyup", function() {
+    var filter = $(this).val();
+
+    $(".event-feed-list").children().each(function(){
+      if ($(this).text().search(new RegExp(filter, "i")) === -1) {
+        $(this).addClass("hidden")
+      }
+      else {
+        $(this).removeClass("hidden")
+      }
+    })
+
+  })
+
+}
+;
 function timeSince(date) {
 
     var seconds = Math.floor((new Date() - date) / 1000);
