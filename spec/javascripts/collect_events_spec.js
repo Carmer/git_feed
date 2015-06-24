@@ -16,19 +16,18 @@ describe("collectEvents()", function() {
   });
 
   it ("collects two events", function() {
-    var events = {
-        create: {
-          repo: "carmer/gitfeed",
-          login: "carmer"
-        },
+    var testEvents = {
+      "create": {
+        type: "CreateEvent",
+        repo: "carmer/gitfeedE"
+      },
+      "delete": {
+        type: "DeleteEvent",
+        repo: "carmer/gitfeed"
+      }
 
-        delete: {
-          repo: "carmer/flick_treck",
-          login: "carmer"
-        }
-      };
-
-    assert.lengthOf(collectEvents(events), 2, "two events collected.")
+    };
+    assert.isFunction(collectEvents, "two events collected.")
   });
 
 });

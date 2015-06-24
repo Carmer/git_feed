@@ -14,23 +14,23 @@ var loader = function() {
   else {
     communityFeed();
   }
-}
+};
 
 var communityFeed = function() {
-  var token = $("#community-page").data("userToken")
-  $(".windows8").toggleClass("hidden")
-  $(".event-feed-list").attr("id", "community-feed-list")
+  var token = $("#community-page").data("userToken");
+  $(".windows8").toggleClass("hidden");
+  $(".event-feed-list").attr("id", "community-feed-list");
   $.ajax({
     url: "http://api.github.com/users/" + $("#community-page").data("userLogin") + "/received_events?page=" + pageNumber + "&per_page=100&access_token=" + token,
     dataType: "json",
     success: function(success) {
       collectEvents(success);
-      $(".load-more-button").toggleClass("hidden")
-      $(".windows8").toggleClass("hidden")
+      $(".load-more-button").toggleClass("hidden");
+      $(".windows8").toggleClass("hidden");
     },
     error: function(error) {
-      $(".load-more-button").toggleClass("hidden")
-      $(".windows8").toggleClass("hidden")
+      $(".load-more-button").toggleClass("hidden");
+      $(".windows8").toggleClass("hidden");
       }
   })
   .done( function() {
@@ -39,27 +39,27 @@ var communityFeed = function() {
     populateCommitHistory();
     filterEvents();
   });
-}
+};
 
 
 var publicFeed = function() {
   // $("#public-feed").on("click", function(){
     // $(".event-feed-list").empty();
-    $(".windows8").toggleClass("hidden")
-    var token = $("#public-page").data("userToken")
-    $(".event-feed-list").attr("id", "public-feed-list")
-    eventList = []
+    $(".windows8").toggleClass("hidden");
+    var token = $("#public-page").data("userToken");
+    $(".event-feed-list").attr("id", "public-feed-list");
+    eventList = [];
     $.ajax({
       url: "http://api.github.com/events?page=" + pageNumber + "&per_page=100&access_token=" + token,
       dataType: "json",
       success: function(success) {
-        collectEvents(success)
-        $(".load-more-button").toggleClass("hidden")
-        $(".windows8").toggleClass("hidden")
+        collectEvents(success);
+        $(".load-more-button").toggleClass("hidden");
+        $(".windows8").toggleClass("hidden");
       },
         error: function(error) {
-        $(".load-more-button").toggleClass("hidden")
-        $(".windows8").toggleClass("hidden")
+        $(".load-more-button").toggleClass("hidden");
+        $(".windows8").toggleClass("hidden");
         }
     })
   .done( function() {
@@ -69,36 +69,36 @@ var publicFeed = function() {
     populateCommitHistory();
   });
 // })
-}
+};
 
 
 var exploreFeed = function() {
-  $(".event-feed-list").attr("id", "explore-feed-list")
+  $(".event-feed-list").attr("id", "explore-feed-list");
   $("#explore-button").on("click", function(){
   $(".event-feed-list").empty();
     exploreFeedCall();
     filterEvents();
-  })
-}
+  });
+};
 
 var exploreFeedCall = function()  {
-  $(".windows8").toggleClass("hidden")
-  $(".event-feed-list").attr("id", "explore-feed-list")
-  var token = $("#explore-page").data("userToken")
+  $(".windows8").toggleClass("hidden");
+  $(".event-feed-list").attr("id", "explore-feed-list");
+  var token = $("#explore-page").data("userToken");
   var username = $("#explore-username").val();
   $.ajax({
     url: "http://api.github.com/users/" + username + "/events?page=" + pageNumber + "&per_page=100&access_token=" + token,
     dataType: "json",
     success: function(success) {
       collectEvents(success);
-      $(".windows8").toggleClass("hidden")
-      $(".load-more-button").toggleClass("hidden")
+      $(".windows8").toggleClass("hidden");
+      $(".load-more-button").toggleClass("hidden");
     },
     error: function(error) {
-        $(".load-more-button").toggleClass("hidden")
-      $(".windows8").toggleClass("hidden")
+        $(".load-more-button").toggleClass("hidden");
+      $(".windows8").toggleClass("hidden");
       }
-  })
+  });
   $.ajax({
     url: "http://api.github.com/users/" + username + "/received_events?page=" + pageNumber + "&per_page=100&access_token=" + token,
     dataType: "json",
@@ -106,7 +106,7 @@ var exploreFeedCall = function()  {
       collectEvents(success);
     },
     error: function(error) {
-      $(".windows8").toggleClass("hidden")
+      $(".windows8").toggleClass("hidden");
       }
   })
   .done( function() {
@@ -115,7 +115,7 @@ var exploreFeedCall = function()  {
     filterEvents();
     sortEvents();
   });
-}
+};
 
 
 
@@ -132,10 +132,10 @@ var collectEvents = function(eventsInfo) {
 };
 
 
-////Not sure if ssort works correctly yet
-
-var sortEvents = function() {
-  eventList.sort(function(x,y){
-    return x - y;
-  });
-}
+//Not sure if ssort works correctly yet
+//
+// var sortEvents = function() {
+//   eventList.sort(function(x,y){
+//     return x - y;
+//   });
+// };
