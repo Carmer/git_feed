@@ -1,5 +1,27 @@
 // Main Style
 
+#flash_danger {
+  background-color: #e57373;
+  opacity: .8;
+  text-align: center;
+  width: 50%;
+  margin-left: 25%;
+  border-radius: 15px 15px 0px 0px;
+}
+
+#flash_success {
+  background-color: #80cbc4 ;
+  opacity: .8;
+  text-align: center;
+  width: 50%;
+  margin-left: 25%;
+  border-radius: 0px 0px 15px 15px;
+}
+
+div#explore-button-div {
+  margin-bottom: -3px;
+}
+
 @font-face {
   h1 {
     font-weight: medium;
@@ -10,6 +32,17 @@
   padding-top: 5px;
 }
 
+.col.s12.center-align.load-more-button {
+  padding-bottom: 5%;
+}
+
+.nav-search-input {
+  left: -200px;
+}
+
+label#searchlabel {
+  left: -35px;
+}
 
 // Login page
 

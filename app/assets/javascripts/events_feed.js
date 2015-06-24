@@ -133,9 +133,9 @@ var collectEvents = function(eventsInfo) {
 
 
 //Not sure if ssort works correctly yet
-//
-// var sortEvents = function() {
-//   eventList.sort(function(x,y){
-//     return x - y;
-//   });
-// };
+
+var sortEvents = function() {
+  eventList.sort(function(x,y){
+    return x - y;
+  });
+};

@@ -33,7 +33,7 @@ var printGenericEvent = function(events) {
     + "'>"
     + events[i].actor.login
     + "</a>"
-    + " - "
+    + " "
     + naturalLanguageEventInfo(events[i])
     + "</h5>"
     + "<div class='col s9 offest-s3 v-align undo-padding'>"

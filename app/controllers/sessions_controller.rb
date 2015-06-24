@@ -3,14 +3,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    
+
     user = User.find_or_create_by_auth(auth)
     if user.save
-      flash[:success] = "Log In Successful"
+      flash[:success] = "One - Two - Three DO IT ... Git-yer Feed on. "
       session[:user_id] = user.id
       redirect_to user
     else
-      flash.now[:success] = "Log In Unsuccessful. Please Try Again"
+      flash.now[:success] = "Log In Unsuccessful You Rapscallion."
       render :new
     end
   end
