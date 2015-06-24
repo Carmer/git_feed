@@ -1,5 +1,5 @@
 #Git_Feed
-### A socialized event feed for git hub.
+### An event feed for git hub.
 
 ==============================================
 
