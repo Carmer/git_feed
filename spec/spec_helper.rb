@@ -45,7 +45,7 @@ RSpec.configure do |config|
   end
 
 
-  config.before(:suite) do
+  config.before(:each) do
     DatabaseCleaner.clean_with(:truncation)
   end
 # The settings below are suggested to provide a good initial experience

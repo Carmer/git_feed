@@ -12,7 +12,7 @@ RSpec.feature "Community-page" do
 
     visit public_path
 
-    expect(current_path).to eq(user_path()
+    expect(current_path).to eq("/public-feed")
     expect(page).to have_content("Git_Feed")
     expect(page).to have_content("Public Feed")
     expect(page).to have_content("Community Feed")
