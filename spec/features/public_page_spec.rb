@@ -1,5 +1,4 @@
 require "rails_helper"
-require "helper"
 
 RSpec.feature "Community-page" do
     let(:user) { User.create(login: "VanFunkenstein",
@@ -7,7 +6,9 @@ RSpec.feature "Community-page" do
 
   scenario "User visits community page" do
 
-    github_login
+    allow_any_instance_of(ApplicationController)
+                          .to receive(:current_user)
+                          .and_return(user)
 
     visit public_path
 
