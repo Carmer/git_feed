@@ -22,7 +22,7 @@ gem 'httparty'
 gem 'foreman'
 gem 'skylight'
 gem 'puma'
-
+gem 'awesome_print'
 
 group :development, :test do
   gem 'byebug'

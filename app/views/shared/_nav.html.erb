@@ -4,6 +4,7 @@
         <%= link_to "Git_Feed", public_path, id: "brand-logo" %>
 
 
+
         <ul class="right hide-on-med-and-down">
           <li class="col s6">
             <div class="input-field nav-search-input">
@@ -11,8 +12,9 @@
               <input id="search-bar" type="text" class="validate">
             </div>
           </li>
-          <li><%= link_to "Public Feed", public_path, id: "public-feed" %></li>
+          <li><a href="/"><%= image_tag current_user.avatar_url, class: "nav-avatar" %></a></li>
           <li><%= link_to "Community Feed", root_path, id: "public-feed" %></li>
+          <li><%= link_to "Public Feed", public_path, id: "public-feed" %></li>
           <li><%= link_to "Explore", explore_path, id: "explore" %></li>
           <% if logged_in? %>
           <li><%= link_to "Log Out", logout_path %></li>
